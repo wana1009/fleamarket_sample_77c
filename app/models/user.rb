@@ -3,8 +3,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items
-  has_many :cards
-  belongs_to :address
+  # has_many :cards 
+  has_one :address
 
 
 
