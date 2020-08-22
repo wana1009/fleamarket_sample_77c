@@ -10,9 +10,9 @@
 |charge_id|integer|null: false, foreign_key: true|
 |prefecture_id|integer|null: false, foreign_key: true|
 |days_id|integer|null: false, foreign_key: true|
-|user_id|references(integer)|null: false, foreign_key: true|
-|category_id|references(integer)|null: false, foreign_key: true|
-|brand_id|references(integer)|foreign_key: true|
+|user_id|references|null: false, foreign_key: true|
+|category_id|references|null: false, foreign_key: true|
+|brand_id|references|foreign_key: true|
 ### Association
 - has_many :images
 - belongs_to :brand
@@ -33,7 +33,7 @@
 ### Association
 - has_many :items
 - has_many :cards
-- belongs_to :address
+- has_one :address
 
 ## cardsテーブル
 |Column|Type|Options|
@@ -41,7 +41,7 @@
 |card_id|integer|null: false|
 |expiration_date|integer|null: false|
 |security_code|integer|null: false|
-|user_id|references(integer)|null: false, foreign_key: true|
+|user_id|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :user
 
@@ -58,7 +58,7 @@
 |address2|string|null: false|
 |billding_name|string||
 |phone_number|string|unique :true|
-|user_id|references(integer)|null: false, foreign_key: true|
+|user_id|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :user
 
@@ -66,7 +66,7 @@
 |Column|Type|Options|
 |------|----|-------|
 |url|string|null: false|
-|item_id|references(integer)|null: false, foreign_key: true|
+|item_id|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :item
 
@@ -83,7 +83,7 @@
 |name|string|null: false|
 |ancestry|string|index: true|
 ### Association
--has_many :items
+- has_many :items
 
 
 
