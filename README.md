@@ -6,10 +6,10 @@
 |detail|text|null: false|
 |price|integer|null: false, index: true|
 |size|string||
-|condition_id|integer|null: false, index: true|
-|charge_id|integer|null: false, foreign_key: true|
-|prefecture_id|integer|null: false, foreign_key: true|
-|days_id|integer|null: false, foreign_key: true|
+|condition_id|integer|null: false, active_hash|
+|charge_id|integer|null: false, active_hash|
+|prefecture_id|integer|null: false, active_hash|
+|days_id|integer|null: false, active_hash|
 |user_id|references|null: false, foreign_key: true|
 |category_id|references|null: false, foreign_key: true|
 |brand_id|references|foreign_key: true|
@@ -38,7 +38,7 @@
 ## cardsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|card_id|integer|null: false|
+|card_id|string|null: false|
 |customer_id|string|null: false|
 |user_id|references|null: false, foreign_key: true|
 ### Association
@@ -52,7 +52,7 @@
 |first_kana|string|null: false|
 |last_kana|string|null: false|
 |postal_code|string|null: false|
-|prefecture_id|integer|null: false, foreign_key: true|
+|prefecture_id|integer|null: false, active_hash|
 |town|string|null: false|
 |house_number|string|null: false|
 |building_name|string||
