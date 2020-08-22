@@ -39,8 +39,7 @@
 |Column|Type|Options|
 |------|----|-------|
 |card_id|integer|null: false|
-|expiration_date|integer|null: false|
-|security_code|integer|null: false|
+|customer_id|string|null: false|
 |user_id|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :user
