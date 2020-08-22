@@ -56,7 +56,7 @@
 |prefecture_id|integer|null: false, foreign_key: true|
 |address1|string|null: false|
 |address2|string|null: false|
-|billding_name|string||
+|building_name|string||
 |phone_number|string|unique :true|
 |user_id|references|null: false, foreign_key: true|
 ### Association
@@ -84,6 +84,4 @@
 |ancestry|string|index: true|
 ### Association
 - has_many :items
-
-
 
