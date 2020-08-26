@@ -8,12 +8,5 @@ class User < ApplicationRecord
 
 
 
-  validates :name, presence: true
-  validates :email, presence: true
-  validates :password, presence: true
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :first_kana, presence: true
-  validates :last_kana, presence: true
-  validates :birthday, presence: true
+  validates :nickname, :email, :password, :first_name, :last_name, :first_kana, :last_kana, :birthday ,presence: true
 end
