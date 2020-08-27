@@ -2,24 +2,39 @@
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = render "devise/shared/error_messages", resource: resource
   .field
-    = f.label :nickname
+    = f.label :ニックネーム
     %br/
-    = f.text_field :nickname, autocomplete: "nickname"
+    = f.text_field :nickname, placeholder: "例) フリマ太郎"
   .field
-    = f.label :email
+    = f.label :メールアドレス
     %br/
-    = f.email_field :email, autocomplete: "email"
+    = f.email_field :email, autocomplete: "email", placeholder: "PC・携帯どちらでも可"
   .field
-    = f.label :password
+    = f.label :パスワード
     - if @minimum_password_length
       %em
         (#{@minimum_password_length} characters minimum)
     %br/
-    = f.password_field :password, autocomplete: "new-password"
+    = f.password_field :password, autocomplete: "new-password",  placeholder: "7文字以上の半角英数字"
   .field
-    = f.label :password_confirmation
+    = f.label :パスワード確認
     %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
+    = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "7文字以上の半角英数字"
+  .field
+    = f.label :"お名前(全角)"
+  = f.text_field :last_name, placeholder:"例) 山田"
+  = f.text_field :first_name, placeholder:"例) 太郎"
+  .field
+    = f.label :"お名前カナ(全角)"
+  = f.text_field :last_kana, placeholder:"例) ヤマダ"
+  = f.text_field :first_kana, placeholder:"例) タロウ"
+  .field
+    = f.label :"生年月日"
+    %br
+      .birthday-select-wrap
+        = raw sprintf(f.date_select(:birthday, with_css_classes:'XXXXX', prompt:"--",use_month_numbers:true, start_year:Time.now.year, end_year:1900, date_separator:'%s'),'年','月')+'日'
+      .clearfix
+
   .actions
     = f.submit "Sign up"
 = render "devise/shared/links"
