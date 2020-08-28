@@ -1,0 +1,19 @@
+.search-box
+  - if user_signed_in?
+    %h2 ログインしています
+    = link_to "ログアウト", destroy_user_session_path, method: :delete
+  - else
+    = link_to "新規登録", new_user_registration_path
+    = link_to "ログイン", new_user_session_path
+.main
+  .items-box
+    - @items.each do |item|
+      - if !item.purchase_id.present?
+        .item
+          .item--img
+            - item.images.each do |image|
+              = image_tag image.url
+          .item--name
+            商品名：#{item.name}
+          .item--price
+            値段：#{item.price}円
