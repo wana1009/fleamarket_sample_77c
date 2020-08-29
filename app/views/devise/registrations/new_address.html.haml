@@ -1,0 +1,57 @@
+%h2 住所情報登録
+= form_for @address do |f|
+= render "devise/shared/error_messages", resource: @address 
+  .field
+    = f.label :郵便番号
+    = f.text_field :postal_code,{autofocus: true, placeholder: "例）123-4567"}
+  .field
+    = f.label :都道府県
+    = f.select :prefecture, Address.prefectures.keys, {}, {class: 'form-group__input'}
+            
+  .form-group
+  = f.label :市町村
+  %span.form-group__require 必須
+  = f.text_field :city, autofocus: true, placeholder: "例）札幌市", class: 'form-group__input'
+  .form-group
+    = f.label :番地
+    %span.form-group__require 必須
+    = f.text_field :address, autofocus: true, placeholder: "例）青葉1-1-1", class: 'form-group__input'
+  .form-group
+    = f.label :建物名
+    %span.form-group__optional 任意
+    = f.text_field :apartment, autofocus: true, placeholder: "例）柳ビル103", class: 'form-group__input'
+  .form-group
+    = f.submit '次へ', class: "btn-default btn-red", url: "creditcard_path"
+
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+
+  .field
+    = f.label :ニックネーム
+    %br/
+    = f.text_field :nickname, placeholder: "例) フリマ太郎"
+
+
+          .form-group
+            = f.label :市町村
+            %span.form-group__require 必須
+            = f.text_field :city, autofocus: true, placeholder: "例）札幌市", class: 'form-group__input'
+          .form-group
+            = f.label :番地
+            %span.form-group__require 必須
+            = f.text_field :address, autofocus: true, placeholder: "例）青葉1-1-1", class: 'form-group__input'
+          .form-group
+            = f.label :建物名
+            %span.form-group__optional 任意
+            = f.text_field :apartment, autofocus: true, placeholder: "例）柳ビル103", class: 'form-group__input'
+          .form-group
+            = f.submit '次へ', class: "btn-default btn-red", url: "creditcard_path"
