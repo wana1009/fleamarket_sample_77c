@@ -103,8 +103,8 @@
 |item_id|references|null: false, foreign_key: true|
 |order_id|references|null: false, foreign_key: true|
 ### Association
-- belongs_to :items
-- belongs_to :users
+- belongs_to :item
+- belongs_to :user
 
 ## ordersテーブル
 |Column|Type|Options|
@@ -112,5 +112,5 @@
 |user_id|references|null: false, foreign_key: true|
 |item_id|references|null: false, foreign_key: true|
 ### Association
-- belongs_to :items
-- belongs_to :users
+- belongs_to :item
+- belongs_to :user
