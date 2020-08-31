@@ -1,9 +1,11 @@
 class Address < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :user, optional: true
   belongs_to_active_hash :prefecture
 
-  belongs_to :user, optional: true
-  validates :postal_code, :prefecture, :town, :address, presence: true
-  validates :postal_code, format: { with: /\A\d{3}[-]\d{4}$|^\d{3}[-]\d{2}$|^\d{3}\z/ }
-
+  validates :town, :house_number, :prefecture_id, presence: true
+  validates :postal_code, presence: true,
+            format: { with: /\A[0-9]{3}-[0-9]{4}\z/,
+              message: "はハイフンを含めて正しく入力して下さい。"
+            }
 end

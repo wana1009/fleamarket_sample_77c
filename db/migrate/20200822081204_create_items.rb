@@ -5,11 +5,11 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.text :detail, null:false
       t.integer :price, null:false, index:true
       t.string :size
-      t.integer :user_id, foreign_key: true
-      t.integer :category_id, foreign_key: true
-      t.integer :brand_id, foreign_key: true
+      t.references :seller, type: :integer, null:false
+      t.references :order, type: :integer
+      t.references :category, type: :integer, null:false
+      t.references :brand, type: :integer
       t.timestamps
     end
   end
 end
-
