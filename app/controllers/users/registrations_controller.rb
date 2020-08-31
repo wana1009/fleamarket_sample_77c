@@ -19,19 +19,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
     render :new_address
   end
 
+  def new_address
+  end
+
+
   def create_address
     @user = User.new(session["devise.regist_data"]["user"])
     @address = Address.new(address_params)
-    if @address.invalid?
+    unless @address.valid?
       flash.now[:alert] = @address.errors.full_messages
       render :new_address and return
     end
-
     @user.build_address(@address.attributes)
     @user.save
-    session["devise.regist_data"]["user"].clear
     sign_in(:user, @user)
+    redirect_to root_path
   end
+
 
   protected
 
@@ -40,7 +44,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def address_params
-    params.require(:address).permit(:first_name, :last_name, :first_kana, :last_kana, :postal_code, :town, :house_number, :building_name, :phone_number)
+    params.require(:address).permit(:first_name, :last_name, :first_kana, :last_kana, :postal_code,
+                                    :town, :house_number, :building_name, :phone_number, :prefecture_id)
   end
 
 

@@ -1,5 +1,5 @@
 %h2 住所情報登録
-= form_with model: @address, local: true do |f|
+= form_with(model: @address, local: true) do |f|
   = render "devise/shared/error_messages", resource: resource
   .field
     = f.label :"お名前(全角)"
@@ -13,6 +13,9 @@
     = f.label :郵便番号
     = f.text_field :postal_code,{autofocus: true, placeholder: "例）123-4567"}
   .field
+    = f.label :prefecture,"都道府県"
+    = f.collection_select :prefecture_id, Prefecture.all, :id, :name, prompt: "--"
+  .field
     = f.label :市町村
     = f.text_field :town, autofocus: true, placeholder: "例) 渋谷区"
   .field
@@ -24,6 +27,5 @@
   .field
     = f.label :phone_number,"電話番号"
     = f.text_field :phone_number, placeholder: "例) 09012345678"
-  .actions
-    = f.submit "登録"
-= render "devise/shared/links"
+  
+  = f.submit "登録"
