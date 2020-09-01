@@ -8,7 +8,7 @@
 .main
   .items-box
     - @items.each do |item|
-      - if !item.purchase_id.present?
+      - if !item.order_id.present?
         .item
           .item--img
             - item.images.each do |image|
