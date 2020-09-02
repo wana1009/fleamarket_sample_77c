@@ -69,10 +69,11 @@ ActiveRecord::Schema.define(version: 2020_08_31_045923) do
   end
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "url", null: false
-    t.integer "item_id"
+    t.text "url", null: false
+    t.integer "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_images_on_item_id"
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -80,13 +81,18 @@ ActiveRecord::Schema.define(version: 2020_08_31_045923) do
     t.text "detail", null: false
     t.integer "price", null: false
     t.string "size"
-    t.integer "user_id"
-    t.integer "category_id"
+    t.integer "seller_id", null: false
+    t.integer "order_id"
+    t.integer "category_id", null: false
     t.integer "brand_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_items_on_brand_id"
+    t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["name"], name: "index_items_on_name"
+    t.index ["order_id"], name: "index_items_on_order_id"
     t.index ["price"], name: "index_items_on_price"
+    t.index ["seller_id"], name: "index_items_on_seller_id"
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -115,7 +121,7 @@ ActiveRecord::Schema.define(version: 2020_08_31_045923) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "nickname", default: "", null: false
+    t.string "nickname", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "first_name", null: false
@@ -128,6 +134,8 @@ ActiveRecord::Schema.define(version: 2020_08_31_045923) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
