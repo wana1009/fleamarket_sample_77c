@@ -75,3 +75,6 @@ end
 gem 'devise'
 gem 'active_hash'
 gem 'haml-rails'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog-aws'
