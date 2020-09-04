@@ -336,6 +336,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   devise
+  factory_bot_rails
   fog-aws
   haml-rails
   jbuilder (~> 2.5)
