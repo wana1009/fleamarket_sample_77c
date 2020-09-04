@@ -1,4 +1,4 @@
-#fleamarket DB設計
+# fleamarket DB設計
 ## itemsテーブル
 |Column|Type|Options|
 |------|----|-------|
@@ -10,14 +10,16 @@
 |charge|integer|null: false|
 |prefecture|integer|null: false|
 |day|integer|null: false|
-|user_id|references|null: false, foreign_key: true|
+|seller_id|references|null: false, foreign_key: true|
+|order_id|references|foreign_key: true|
 |category_id|references|null: false, foreign_key: true|
 |brand_id|references|foreign_key: true|
 ### Association
 - has_many :images
 - belongs_to :brand
 - belongs_to :category
-- belongs_to :user
+- has_many :sellers
+- has_many :orders
 - belongs_to_active_hash :condition
 - belongs_to_active_hash :charge
 - belongs_to_active_hash :prefecture
@@ -39,6 +41,8 @@
 - has_many :items
 - has_many :cards
 - has_one :address
+- has_many :sellers
+- has_many :orders
 
 ## cardsテーブル
 |Column|Type|Options|
@@ -90,3 +94,23 @@
 ### Association
 - has_many :items
 
+## sellersテーブル
+|Column|Type|Options|
+|------|----|-------|
+|revenue|integer||
+|profit|integer||
+|user_id|references|null: false, foreign_key: true|
+|item_id|references|null: false, foreign_key: true|
+|order_id|references|null: false, foreign_key: true|
+### Association
+- belongs_to :item
+- belongs_to :user
+
+## ordersテーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_id|references|null: false, foreign_key: true|
+|item_id|references|null: false, foreign_key: true|
+### Association
+- belongs_to :item
+- belongs_to :user

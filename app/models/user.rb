@@ -3,7 +3,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items
-  has_many :cards
+  # has_many :cards
+  has_many :sellers
+  has_many :orders
   has_one :address
 
   with_options presence: true do
