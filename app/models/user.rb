@@ -3,12 +3,27 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items
+  # has_many :cards
   has_many :sellers
   has_many :orders
-  # has_many :cards 
   has_one :address
 
+  with_options presence: true do
+    validates :nickname
+    validates :birthday
+    validates :email,    uniqueness: {case_sensitive: false},
+                         format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i}
+    validates :password, length: {minimum: 7}
 
+    with_options format: {with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/} do
+      validates :first_name
+      validates :last_name
+    end
 
-  validates :nickname, :email, :password, :first_name, :last_name, :first_kana, :last_kana, :birthday ,presence: true
+    with_options format: {with: /\A[ァ-ヶー－]+\z/} do
+      validates :first_kana
+      validates :last_kana
+    end
+  end
+
 end
