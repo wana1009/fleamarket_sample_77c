@@ -108,20 +108,21 @@
         = link_to root_path do
           %h3.title 新規投稿商品
       .productLists
-        .productList
-          - @items.each do |item|
-            - if !item.order_id.present?
-              - item.images.each do |image|
-                .productList--img
-                  = image_tag image.url
-                .productList--body
-                  %h3.name
-                    #{item.name}
-                  .details
-                    %ul
-                      %li
-                        #{item.price}円
-                    %p (税込)
+        - @items.each do |item|
+          - if !item.order_id.present?
+            - item.images.each do |image|
+              .productList
+                = link_to root_path do
+                  %figure.productList--img
+                    = image_tag image.url
+                  .productList--body
+                    %h3.name
+                      #{item.name}
+                    .details
+                      %ul
+                        %li
+                          #{item.price}円
+                      %p (税込)
   %section.pickupContainer
     %h2.head ピックアップブランド
     .productBox
@@ -129,20 +130,21 @@
         = link_to root_path do
           %h3.title アーカイバ
       .productLists
-        .productList
-          - @items.each do |item|
-            - if !item.order_id.present?
-              - item.images.each do |image|
-                .productList--img
-                  = image_tag image.url
-                .productList--body
-                  %h3.name
-                    #{item.name}
-                  .details
-                    %ul
-                      %li
-                        #{item.price}円
-                    %p (税込)
+        - @items.each do |item|
+          - if !item.order_id.present?
+            - item.images.each do |image|
+              .productList
+                = link_to root_path do
+                  %figure.productList--img
+                    = image_tag image.url
+                  .productList--body
+                    %h3.name
+                      #{item.name}
+                    .details
+                      %ul
+                        %li
+                          #{item.price}円
+                      %p (税込)
 %aside.appBanner
   .inner
     %h2.inner__title だれでもかんたん、人生を変えるフリマアプリ
