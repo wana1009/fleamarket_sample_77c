@@ -4,11 +4,11 @@
   .field
     = f.label :"送付先氏名"
     = f.text_field :last_name, placeholder:"例) 山田"
-    = f.text_field :first_name, placeholder:"例) 太郎"
+    = f.text_field :first_name, placeholder:"例) 彩"
   .field
     = f.label :"送付先氏名カナ"
     = f.text_field :last_kana, placeholder:"例) ヤマダ"
-    = f.text_field :first_kana, placeholder:"例) タロウ"
+    = f.text_field :first_kana, placeholder:"例) アヤ"
   .field
     = f.label :郵便番号
     = f.text_field :postal_code,{autofocus: true, placeholder: "例）123-4567"}
@@ -17,13 +17,13 @@
     = f.collection_select :prefecture_id, Prefecture.all, :id, :name, prompt: "--"
   .field
     = f.label :市町村
-    = f.text_field :town, autofocus: true, placeholder: "例) 渋谷区"
+    = f.text_field :town, autofocus: true, placeholder: "例) 横浜市緑区"
   .field
     = f.label :番地
-    = f.text_field :house_number, autofocus: true, placeholder: "例）神南1-18-2"
+    = f.text_field :house_number, autofocus: true, placeholder: "例）青山1-1-1"
   .field
     = f.label :建物名
-    = f.text_field :building_name, autofocus: true, placeholder: "例) フレーム神南坂 4階"
+    = f.text_field :building_name, autofocus: true, placeholder: "例) 柳ビル103"
   .field
     = f.label :phone_number,"電話番号"
     = f.text_field :phone_number, placeholder: "例) 09012345678"

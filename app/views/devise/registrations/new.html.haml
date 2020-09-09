@@ -1,5 +1,6 @@
-.registration
+.register-wrapper
   .registration__header
+
   .registration__container
     .field__contents-title
       %h2 会員情報入力
@@ -30,12 +31,12 @@
             = f.label :"お名前(全角)"
             %span.registration-form__content__box__require 必須
           = f.text_field :last_name, placeholder:"例) 山田"
-          = f.text_field :first_name, placeholder:"例) 太郎"
+          = f.text_field :first_name, placeholder:"例) 彩"
           .registration-form__content__box
             = f.label :"お名前カナ(全角)"
             %span.registration-form__content__box__require 必須
           = f.text_field :last_kana, placeholder:"例) ヤマダ"
-          = f.text_field :first_kana, placeholder:"例) タロウ"
+          = f.text_field :first_kana, placeholder:"例) アヤ"
           .registration-form__content__box
             = f.label :"生年月日"
             %span.registration-form__content__box__require 必須
@@ -44,5 +45,16 @@
                 = raw sprintf(f.date_select(:birthday, with_css_classes:'XXXXX', prompt:"--",use_month_numbers:true, start_year:Time.now.year, end_year:1900, date_separator:'%s'),'年','月')+'日'
               .clearfix
           .registration-form__content__submit
-            = f.submit "次へ", class:"btn-default btn-red"
+            = f.submit "次へ", class: "next__btn", id: "next__btn", data: {disable_with: "処理中..."}
+          .nav__personal--information
+            = link_to "#", class: "nav__personal--information--link" do
+              本人情報の登録について＞
+          .nav__privacy--information
+            This site is protected by reCAPTCHA and the Google
+            = link_to "#", class: "nav__privacy--information--link" do
+              Privacy Policy
+            and
+            = link_to "#", class: "nav__privacy--information--link" do
+              Terms of Service
+            apply.
   .registration__footer
