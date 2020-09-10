@@ -1,7 +1,6 @@
-.register-wrapper
-  .registration__header
-
-  .registration__container
+.single-container
+  .single-header
+  .single-main
     .field__contents-title
       %h2 会員情報入力
       = form_for(@user, url: user_registration_path, html: { class: "registar-form"}) do |f|
