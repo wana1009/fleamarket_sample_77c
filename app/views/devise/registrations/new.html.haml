@@ -15,7 +15,7 @@
           %span 完了
           .member-header__progress--round
         .member-header__progress--border
-  .single-main
+  .container
     .field__contents
       .field__contents-title
         %h2 会員情報入力
@@ -26,34 +26,41 @@
               = f.label :ニックネーム
               %span.registration-form__content__box__require 必須
               %br/
-              = f.text_field :nickname, placeholder: "例) フリマ太郎"
+              = f.text_field :nickname, placeholder: "例) フリマ太郎", required: true
+
             .registration-form__content__box
               = f.label :メールアドレス
               %span.registration-form__content__box__require 必須
               %br/
-              = f.email_field :email, autocomplete: "email", placeholder: "PC・携帯どちらでも可"
+              = f.email_field :email, autocomplete: "email", placeholder: "PC・携帯どちらでも可", required: true
             .registration-form__content__box
               = f.label :パスワード
               %span.registration-form__content__box__require 必須
               %br/
-              = f.password_field :password, placeholder: "7文字以上の半角英数字"
+              = f.password_field :password, placeholder: "7文字以上の半角英数字", required: true
             .registration-form__content__box
               = f.label :パスワード確認
               %span.registration-form__content__box__require 必須
               %br/
-              = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "7文字以上の半角英数字"
+              = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "7文字以上の半角英数字", required: true
+            .nav
+              .nav__title
+                本人確認
+              .nav__text
+                安全・安心にご利用いただくために、お客さまの本人情報のご登録にご協力ください。他のお客さまに公開されることはありません。
+            .field__name
             .registration-form__content__box
               = f.label :"お名前(全角)"
               %span.registration-form__content__box__require 必須
-            = f.text_field :last_name, placeholder:"例) 山田"
-            = f.text_field :first_name, placeholder:"例) 彩"
+            = f.text_field :last_name, placeholder:"例) 山田", required: true
+            = f.text_field :first_name, placeholder:"例) 彩", required: true
             .registration-form__content__box
               = f.label :"お名前カナ(全角)"
               %span.registration-form__content__box__require 必須
-            = f.text_field :last_kana, placeholder:"例) ヤマダ"
-            = f.text_field :first_kana, placeholder:"例) アヤ"
+            = f.text_field :last_kana, placeholder:"例) ヤマダ", required: true
+            = f.text_field :first_kana, placeholder:"例) アヤ", required: true
             .registration-form__content__box
-              = f.label :"生年月日"
+              = f.label :"生年月日", required: true
               %span.registration-form__content__box__require 必須
               %br
                 .birthday-select-wrap
