@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     post 'addresses', to: 'users/registrations#create_address'
   end
   root to: 'items#index'
+  resources :items, only: [:index, :show]
   resources :items do
     collection do
       get 'search'
