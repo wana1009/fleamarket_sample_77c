@@ -42,7 +42,7 @@
             %th
               出品者
             %td
-              = @item.seller.user_id
+              = @item.seller.user.nickname
 
           %tr
             %th
@@ -62,33 +62,31 @@
             %th
               商品の状態
             %td
-              = @item.condition
+              = @item.condition.name
           %tr
             %th
               配送料の負担
             %td
-              = @item.charge
-          %tr
-            %th
-              配送の方法
-            %td
-              //データベースにない
+              = @item.charge.name
           %tr
             %th
               配送元地域
             %td
-              = @item.prefecture
+              = @item.prefecture.name
           %tr
             %th
               発送日の目安
             %td
-              = @item.day
+              = @item.day.name
       .container__product-details__message
-        -if user_signed_in? && current_user.id == @item.user_signed_in
-          = link_to "商品の編集", edit_product_path, class: "submit-btn submit-btn-red"
+        -if user_signed_in? && current_user.id == @item.seller
+          = link_to "商品の編集", '#', class: "submit-btn submit-btn-red"
+          -# = link_to "商品の編集", edit_item_path, class: "submit-btn submit-btn-red"
           %p
             or
-          = link_to "この商品を削除する", product_path, class: "submit-btn-gray", method: "DELETE"
+          = link_to "この商品を削除する", '#', class: "submit-btn-gray", method: "DELETE"
+          -# = link_to "この商品を削除する", item_path, class: "submit-btn-gray", method: "DELETE"
         - else 
-          = link_to "購入画面に進む", new_item_purchase_path(@item), class: "container__item-details__purchase-screen-button"
+          = link_to "購入画面に進む", '#', class: "container__item-details__purchase-screen-button"
+          -# = link_to "購入画面に進む", new_item_purchase_path(@item), class: "container__item-details__purchase-screen-button"
         
