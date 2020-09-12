@@ -10,7 +10,7 @@
       justify-content: space-around;
       &__logo {
         margin-top: 40px;
-        &--image {
+        &__image {
           height: 50px;
           width: 185px;
         }
@@ -21,28 +21,28 @@
         display: flex;
         justify-content: space-between;
         position: relative;
-        &--text {
+        &__text {
           margin-right: 40px;
           z-index: 1;
           color: #888;
         }
-        &--active {
-          @extend .member-header__progress--text;
+        &__active {
+          @extend .member-header__progress__text;
           font-weight: 600;
           color: #3ccace;
         }
-        &--round {
+        &__round {
           height: 12px;
           width: 12px;
           margin: 8px auto 0;
           border-radius: 50%;
           background-color: #ccc;
         }
-        &--round-blue {
-          @extend .member-header__progress--round;
+        &__round-blue {
+          @extend .member-header__progress__round;
           background-color: #3ccace;
         }
-        &--border {
+        &__border {
           height: 2px;
           width: 220px;
           position: absolute;
@@ -54,20 +54,47 @@
     }
   }
   .container{
-    padding: 0 30px 30px 30px;
-    .field__contents{
+    padding: 0 79.5px;
+    .field-contents{
       width: 700px;
       justify-content: center;
       background-color: white;
       margin: 0 auto;
-      &--title h2{
+      &__title h2{
         text-align: center;
-        padding: 30px 0;
-        border-bottom: 1px solid whitesmoke;
-        font-weight: normal;
+        padding: 32px;
+        font-size: 22px;
+        font-weight: bold;
+        border-bottom: 1px solid #dfdfdf;
       }
-      &--form{
-        padding: 30px 197px 60px;
+      &__form{
+        padding: 40px 40px 64px;
+        background-color: white;
+        &__box {
+          width: 100%;
+          color: #333333;
+          font-size: 14px;
+          padding-bottom: 30px;
+          &__label {
+            height: 14px;
+            width: 83.31px; 
+            color: #333333;
+            font-size: 14px;
+            font-weight: bold;
+          }
+          &__require {
+            margin-left: 8px;
+            font-size: 12px;
+            padding: 0 4px;
+            background-color: #ff0211;
+            color: white;
+            border-radius: 2px;
+            display: inline-block;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1.4em;
+          }
+        }
         .nav{
           padding-bottom: 25px;
           &__title{
@@ -82,7 +109,7 @@
         }
         .actions{
           padding-top: 40px;
-          .next__btn{
+          .next-btn{
             display: inline-block;
             background-color: #00BFFF;
             width: 306px;
