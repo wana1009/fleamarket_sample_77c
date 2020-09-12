@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
 
   def show
     @seller = @item.seller
+    @user = @seller.user
     @category = @item.category
     @brand = @item.brand
     @images = @item.images

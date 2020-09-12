@@ -42,7 +42,7 @@
             %th
               出品者
             %td
-              = @item.seller.user.nickname
+              = @user.nickname
 
           %tr
             %th
@@ -79,7 +79,7 @@
             %td
               = @item.day.name
       .container__product-details__message
-        -if user_signed_in? && current_user.id == @item.seller
+        -if user_signed_in? && current_user.id == @item.seller.user_id
           = link_to "商品の編集", '#', class: "submit-btn submit-btn-red"
           -# = link_to "商品の編集", edit_item_path, class: "submit-btn submit-btn-red"
           %p
