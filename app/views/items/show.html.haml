@@ -1,0 +1,94 @@
+.search-box
+  - if user_signed_in?
+    %h2 ログインしています
+    = link_to "ログアウト", destroy_user_session_path, method: :delete
+  - else
+    = link_to "新規登録", new_user_registration_path
+    = link_to "ログイン", new_user_session_path
+    
+.container
+  .container__item-details
+    %h1.container__item-details__item-name
+      = @item.name
+    .container__item-details__main
+      .container__item-details__main__images
+        .container__item-details__main__images__desplay
+          //商品が販売中かどうかを表示するコードを記載
+          %ul.container__item-details__main__images__display__up
+            - @item.images.each do |image|
+              %li.container__item-details__main__images__display__up__slide-image
+                = image_tag image.url, size: "300x300"
+          %ul.container__product-details__main__images__desplay__down
+            - @item.images.each do |image|
+              %li.container__product-details__main__images__desplay__down__thunbnail-image
+                = image_tag image.url, size: "60x60"
+
+      .container__item-details__price
+        %span.container__item-details__price__amount
+          ¥
+          = @item.price
+        %span.container__item__price__tax
+          (税込み)
+        %span.container__item__price__delivery-fee
+          送料込み
+
+      .container__item-details__item-description
+        %p.container__item-details__item-description__inner
+          = simple_format @item.detail
+
+      %table.container__item-details__main__detail
+        %tbody
+          %tr
+            %th
+              出品者
+            %td
+              = @item.seller.user_id
+
+          %tr
+            %th
+              カテゴリー
+            %td.category
+              = link_to "" do
+                .category
+                  %span
+                    = @category_name
+                    //中分類、小分類を表示するコードを記述
+          %tr
+            %th
+              ブランド
+            %td
+              = @brand.name
+          %tr
+            %th
+              商品の状態
+            %td
+              = @item.condition
+          %tr
+            %th
+              配送料の負担
+            %td
+              = @item.charge
+          %tr
+            %th
+              配送の方法
+            %td
+              //データベースにない
+          %tr
+            %th
+              配送元地域
+            %td
+              = @item.prefecture
+          %tr
+            %th
+              発送日の目安
+            %td
+              = @item.day
+      .container__product-details__message
+        -if user_signed_in? && current_user.id == @item.user_signed_in
+          = link_to "商品の編集", edit_product_path, class: "submit-btn submit-btn-red"
+          %p
+            or
+          = link_to "この商品を削除する", product_path, class: "submit-btn-gray", method: "DELETE"
+        - else 
+          = link_to "購入画面に進む", new_item_purchase_path(@item), class: "container__item-details__purchase-screen-button"
+        

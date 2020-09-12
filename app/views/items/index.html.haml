@@ -10,10 +10,11 @@
     - @items.each do |item|
       - if !item.order_id.present?
         .item
-          .item--img
-            - item.images.each do |image|
-              = image_tag image.url
-          .item--name
-            商品名：#{item.name}
-          .item--price
-            値段：#{item.price}円
+          = link_to "/items/#{item.id}"do
+            .item--img
+              - item.images.each do |image|
+                = image_tag image.url
+            .item--name
+              商品名：#{item.name}
+            .item--price
+              値段：#{item.price}円
