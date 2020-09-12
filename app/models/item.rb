@@ -18,5 +18,5 @@ class Item < ApplicationRecord
   validates :condition, presence: true
   validates :charge, presence: true
   validates :prefecture, presence: true
-  validates :days, presence: true
+  validates :day, presence: true
 end

@@ -8,5 +8,10 @@ Rails.application.routes.draw do
   end
   root to: 'items#index'
   resources :items, only: [:index, :show]
+  resources :items do
+    collection do
+      get 'search'
+    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
