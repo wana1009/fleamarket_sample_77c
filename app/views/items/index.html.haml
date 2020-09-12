@@ -31,18 +31,6 @@
           %li.listsRight__item.listsRight__item--new
             = link_to "新規会員登録", new_user_registration_path
 .main
-  .items-box
-    - @items.each do |item|
-      - if !item.order_id.present?
-        .item
-          = link_to "/items/#{item.id}"do
-            .item--img
-              - item.images.each do |image|
-                = image_tag image.url
-            .item--name
-              商品名：#{item.name}
-            .item--price
-              値段：#{item.price}円
   %section.mainVisual
     .content
       %h2.content__subtitle
