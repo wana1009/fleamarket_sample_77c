@@ -36,6 +36,10 @@ ja:
         prefecture_id: 都道府県
         town: 市区町村
         house_number: 番地
+        first_name: 姓
+        last_name: 名
+        first_kana: 姓カナ
+        last_kana: 名カナ
     models:
       user: ユーザー
       address: 住所

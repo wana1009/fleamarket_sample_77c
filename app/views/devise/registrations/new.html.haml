@@ -18,12 +18,12 @@
   .main
   .main__single-container
     %h2.main__single-container__head 会員情報登録
-    = form_for(@user, url: user_registration_path, html: { class: "registar-form"}) do |f|
+    = form_for(@user, url: user_registration_path, html: { class: "register-form"}) do |f|
       .register-form__content
         .register-form__content__box
           %label.register-form__content__box__label ニックネーム
           %span.register-form__content__box__require 必須
-          = f.text_field :nickname, placeholder: "ニックネーム", class: "register-form__content__box--one-field" 
+          = f.text_field :nickname, placeholeer: "ニックネーム", class: "register-form__content__box--one-field" 
           = render partial: 'devise/shared/error_messages', locals: { column: :nickname, input: @user }
 
         .register-form__content__box
