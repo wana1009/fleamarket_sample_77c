@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 2020_08_31_045923) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["prefecture_id"], name: "index_addresses_on_prefecture_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
