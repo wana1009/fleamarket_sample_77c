@@ -13,8 +13,7 @@ class User < ApplicationRecord
     validates :birthday
     validates :email,    uniqueness: {case_sensitive: false},
                          format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i}
-    validates :password, length: {minimum: 7}
-
+    validates :password, length: { minimum: 7 }, format: { with: /(?=.*\d+.*)(?=.*[a-zA-Z]+.*)./ }
     with_options format: {with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/} do
       validates :first_name
       validates :last_name

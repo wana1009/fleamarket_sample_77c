@@ -1,4 +1,4 @@
-class UsersController < ApplicationControllerend
+class UsersController < ApplicationController
   def edit
   end
 
@@ -13,7 +13,7 @@ class UsersController < ApplicationControllerend
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :first_name, :last_name, :first_kana, :last_kana, :birthday)
+    params.require(:user).permit(:nickname, :email, :first_name, :last_name, :first_kana, :last_kana, :birthday)
     
   end  
 end
