@@ -1,4 +1,4 @@
-#register-wrapper
+.register-wrapper
   .registrations__header
     .member-header
       %h1.member-header__logo
@@ -32,18 +32,18 @@
           = f.email_field :email, placeholder: "PC携帯どちらでも可",class: "register-form__content__box--one-field"
           = render partial: 'devise/shared/error_messages', locals: { column: :email, input: @user }
         
-          .register-form__content__box
-            %label.register-form__content__box__label パスワード
-            %span.register-form__content__box__require 必須
-            = f.password_field :password, placeholder: "７文字以上の半角英数字", class: "register-form__content__box--one-field"
-            %p.register-form__content__box--text2 ※英字と数字の両方を含めて設定してください
-            = render partial: 'devise/shared/error_messages', locals: { column: :password, input: @user }
+        .register-form__content__box
+          %label.register-form__content__box__label パスワード
+          %span.register-form__content__box__require 必須
+          = f.password_field :password, placeholder: "７文字以上の半角英数字", class: "register-form__content__box--one-field"
+          %p.register-form__content__box--text2 ※英字と数字の両方を含めて設定してください
+          = render partial: 'devise/shared/error_messages', locals: { column: :password, input: @user }
 
-          .register-form__content__box
-            %label.register-form__content__box__label パスワード（確認）
-            %span.register-form__content__box__require 必須
-            = f.password_field :password_confirmation, autocomplete: "off", placeholder: "確認のため、もう一度入力してください", class: "register-form__content__box--one-field"
-            = render partial: 'devise/shared/error_messages', locals: { column: :password_confirmation, input: @user }
+        .register-form__content__box
+          %label.register-form__content__box__label パスワード（確認）
+          %span.register-form__content__box__require 必須
+          = f.password_field :password_confirmation, autocomplete: "off", placeholder: "確認のため、もう一度入力してください", class: "register-form__content__box--one-field"
+          = render partial: 'devise/shared/error_messages', locals: { column: :password_confirmation, input: @user }
 
         .register-form__content__box
           %label.register-form__content__box__label  お名前（全角）
