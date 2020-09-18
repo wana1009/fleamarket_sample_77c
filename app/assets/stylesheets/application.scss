@@ -1,3 +1,9 @@
 @import "reset";
 @import "registrations/new";
+@import "registrations/new_address";
 @import "sessions/new";
+@import "items";
+
+body {
+  font-family: "Source Sans Pro", Helvetica, Arial, "游ゴシック体", "YuGothic", "メイリオ", "Meiryo", sans-serif;
+}
