@@ -112,7 +112,7 @@
           - if !item.order_id.present?
             - item.images.each do |image|
               .productList
-                = link_to root_path do
+                = link_to item_path(item.id) do
                   %figure.productList--img
                     = image_tag image.url
                   .productList--body
