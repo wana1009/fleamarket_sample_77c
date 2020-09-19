@@ -12,6 +12,11 @@ class ItemsController < ApplicationController
     @images = @item.images
   end
 
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+  end
+
   private
   def set_item
     @item = Item.find(params[:id])

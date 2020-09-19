@@ -86,7 +86,7 @@
           -# = link_to "商品の編集", edit_item_path, class: "submit-btn submit-btn-red"
           %p
             or
-          = link_to "この商品を削除する", '#', class: "submit-btn-gray", method: "DELETE"
+          = link_to "この商品を削除する", item_path(@item), method: :delete, class: "item-delete-btn"
           -# = link_to "この商品を削除する", item_path, class: "submit-btn-gray", method: "DELETE"
         - else 
           = link_to "購入画面に進む", '#', class: "container__item-details__purchase-screen-button"
