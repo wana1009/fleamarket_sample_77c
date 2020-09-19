@@ -1,35 +1,4 @@
-%header.pcHeader
-  .headerInner
-    .mainHeader
-      %h1.icon
-        = link_to image_tag("logo.png",width: "140", height: "41"), root_path 
-      .searchBox
-        = form_tag search_items_path, method: :get do 
-          = text_field_tag :key, params[:key], placeholder: "キーワードから探す", class: "searchBox--input", id: "searchInput"
-          %button{type: "submit"}
-            .searchBox__icon
-              = image_tag("icon-search 1.png",width: "20",height: "20")
-      %ul.resultLists
-    .nav
-      %ul.listsLeft
-        %li.listsLeft__item.listLeft__item--first
-          = link_to "カテゴリー", root_path, id: "catBtn"
-          .tree.displayNone
-            %ul.categoryTree
-              %li.categoryTree__item
-        %li.listsLeft__item
-          = link_to "ブランド", root_path, id: "brandBtn"
-          %ul.brandsPulldown.displayNone
-
-      %ul.listsRight
-        - if user_signed_in?
-          %h2 ログインしています
-          = link_to "ログアウト", destroy_user_session_path, method: :delete
-        - else
-          %li.listsRight__item.listsRight__item--login
-            = link_to "ログイン", new_user_session_path
-          %li.listsRight__item.listsRight__item--new
-            = link_to "新規会員登録", new_user_registration_path
+=render "items/header"
 .main
   %section.mainVisual
     .content
@@ -112,7 +81,7 @@
           - if !item.order_id.present?
             - item.images.each do |image|
               .productList
-                = link_to root_path do
+                = link_to item_path(item.id) do
                   %figure.productList--img
                     = image_tag image.url
                   .productList--body
@@ -134,7 +103,7 @@
           - if !item.order_id.present?
             - item.images.each do |image|
               .productList
-                = link_to root_path do
+                = link_to item_path(item.id) do
                   %figure.productList--img
                     = image_tag image.url
                   .productList--body
@@ -145,46 +114,4 @@
                         %li
                           #{item.price}円
                       %p (税込)
-%aside.appBanner
-  .inner
-    %h2.inner__title だれでもかんたん、人生を変えるフリマアプリ
-    %p.inner__text 今すぐ無料ダウンロード
-    .inner__icon
-      = link_to image_tag("app-store-9c5e28e8f81bd9912e0ded2f78821e04778a1356c05dc7c7bf1e88614be37c34.svg",width: "180",height:"53.3"),root_path, class: "aBtn"
-      = link_to image_tag("google-play-469c63f1269e456307c4dde176b33cc3bbbbf142ac4d7369656010130149db1a.svg",width: "180",height:"53.3"),root_path, class: "gBtn"
-.footer
-  %ul.contents
-    %li.content
-      %h2.content__head FURIMAについて
-      %ul
-        %li
-          = link_to "会社概要(運営会社)", root_path
-        %li
-          = link_to "プライバシーポリシー", root_path
-        %li
-          = link_to "FURIMA利用規約", root_path
-        %li
-          = link_to "ポイントに関する特約", root_path
-    %li.content
-      %h2.content__head FURIMAを見る
-      %ul
-        %li
-          = link_to "カテゴリー一覧", root_path
-        %li
-          = link_to "ブランド一覧", root_path
-    %li.content
-      %h2.content__head ヘルプ&ガイド
-      %ul
-        %li
-          = link_to "FURIMAガイド", root_path
-        %li
-          = link_to "FURIMAロゴ利用ガイドライン", root_path
-        %li
-          = link_to "お知らせ", root_path
-  .footer__logo
-    = link_to image_tag("logo-white.png",width:"134",height:"36"), root_path
-  %p ©︎FURIMA
-= link_to root_path do
-  .purchaseBtn
-    %span.purchaseBtn__text 出品する
-    = image_tag("icon_camera.png", class: "purchaseBtn__icon")
+= render "items/footer"

@@ -1,28 +1,20 @@
-.search-box
-  - if user_signed_in?
-    %h2 ログインしています
-    = link_to "ログアウト", destroy_user_session_path, method: :delete
-  - else
-    = link_to "新規登録", new_user_registration_path
-    = link_to "ログイン", new_user_session_path
-    
+= render "items/header"
 
-    
 .container
   .container__item-details
     %h1.container__item-details__item-name
       = @item.name
     .container__item-details__main
       .container__item-details__main__images
-        .container__item-details__main__images__desplay
+        .container__item-details__main__images__display
           //商品が販売中かどうかを表示するコードを記載する
           %ul.container__item-details__main__images__display__up
             - @item.images.each do |image|
               %li.container__item-details__main__images__display__up__slide-image
                 = image_tag image.url, size: "300x300"
-          %ul.container__product-details__main__images__desplay__down
+          %ul.container__product-details__main__images__display__down
             - @item.images.each do |image|
-              %li.container__product-details__main__images__desplay__down__thunbnail-image
+              %li.container__item-details__main__images__display__down__thumbnail-image
                 = image_tag image.url, size: "60x60"
 
       .container__item-details__price
@@ -91,4 +83,4 @@
         - else 
           = link_to "購入画面に進む", '#', class: "container__item-details__purchase-screen-button"
           -# = link_to "購入画面に進む", new_item_purchase_path(@item), class: "container__item-details__purchase-screen-button"
-        
+= render "items/footer"
