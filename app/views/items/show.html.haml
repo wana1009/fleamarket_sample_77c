@@ -20,9 +20,9 @@
             - @item.images.each do |image|
               %li.container__item-details__main__images__display__up__slide-image
                 = image_tag image.url, size: "300x300"
-          %ul.container__product-details__main__images__desplay__down
+          %ul.container__item-details__main__images__desplay__down
             - @item.images.each do |image|
-              %li.container__product-details__main__images__desplay__down__thunbnail-image
+              %li.container__item-details__main__images__desplay__down__thumbnail-image
                 = image_tag image.url, size: "60x60"
 
       .container__item-details__price
@@ -80,7 +80,7 @@
               発送日の目安
             %td
               = @item.day.name
-      .container__product-details__message
+      .container__item-details__message
         -if user_signed_in? && current_user.id == @item.seller.user_id
           = link_to "商品の編集", '#', class: "submit-btn submit-btn-red"
           -# = link_to "商品の編集", edit_item_path, class: "submit-btn submit-btn-red"
