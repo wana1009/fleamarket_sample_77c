@@ -1,0 +1,118 @@
+.single-container{  
+  .header-h{
+    height: 128px;  
+    background-color: #f5f5f5;
+    align-items: center;
+    display: flex;
+    justify-content: center; 
+
+    &__center{
+      width: 185px;
+      height: 49px;
+
+      &:hover{
+        opacity: 0.6;
+      }
+    }
+  }
+
+  .single-main {
+    width: 100%;
+  
+  
+    &__login-panel{
+      background-color: white;
+      width: 456px;
+      margin: 0 auto;
+    }
+  
+      &__login-no-acount {
+        text-align: center;
+        padding: 32px;
+        border-bottom: 1px solid #eee;
+      }
+        &__notice {
+          font-size: 14px;
+        }
+  
+        &__move {
+          text-align: center;
+          display: inline-block;
+          height: 42px;
+          width: 328px;
+          color: white;
+          font-size: 14px;
+          background-color: #DD0000;
+          margin: 8px 0px 0px;
+          border: 1px solid #DD0000;
+          line-height: 42px;
+          text-decoration: none;
+        }
+      
+  
+      &__login-form{
+        padding: 24px 64px 32px;
+        
+      }
+  
+        &__form-inner{
+          text-align: center;
+          max-width: 343px;
+          margin: 0 auto;
+        }
+  
+          &__email{
+            height: 50px;
+            width: 328px;
+            margin-top: 10px;
+            padding: 10px 16px 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background: white;
+            line-height: 50px;
+            font-size: 16px;
+            display: block;
+            outline: none;
+          }
+          &__email:focus {
+            border-color: lightgreen;
+          }
+  
+          &__password{
+            height: 50px;
+            width: 328px;
+            margin-top: 25px;
+            padding: 10px 16px 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            background: white;
+            line-height: 50px;
+            font-size: 16px;
+            display: block;
+            outline: none;
+          }
+          &__password:focus {
+            border-color: lightgreen;
+          }
+  
+          &__submit{
+            height: 50px;
+            width: 328px;
+            margin-top: 20px;
+            background: #2C7CFF;
+            border: 1px solid #2C7CFF;
+            color: white;
+            display: block;
+            line-height: 50px;
+            font-size: 14px;
+          }
+  
+          a.password-forget {
+            display: block;
+            margin: 40px 152px 0px 0;
+            color: #0099e8;
+            text-decoration: none;
+            font-size: 14px;
+          }
+  }
+}
