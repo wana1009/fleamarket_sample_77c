@@ -9,8 +9,8 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :brand
   has_many :images
-  has_one :seller
-  has_one :order
+  has_one :sellers
+  has_one :orders
 
   validates :name, presence: true
   validates :detail, presence: true
@@ -18,5 +18,5 @@ class Item < ApplicationRecord
   validates :condition, presence: true
   validates :charge, presence: true
   validates :prefecture, presence: true
-  validates :day, presence: true
+  validates :days, presence: true
 end
