@@ -7,10 +7,11 @@ Rails.application.routes.draw do
     post 'addresses', to: 'users/registrations#create_address'
   end
   root to: 'items#index'
-  resources :items, only: [:index, :show]
-  resources :items do
+  resources :items, only: [:new, :index, :show, :create] do
     collection do
       get 'search'
+      get 'get_category_child', to: 'items#get_category_child'
+      get 'get_category_grandchild', to: 'items#get_category_grandchild'
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
