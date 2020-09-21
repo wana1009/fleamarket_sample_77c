@@ -72,7 +72,8 @@
                 %span.sell-title__require
                   必須
             .sell-collection_select
-              = f.label :condition_id, {class: 'sell-collection_select__label'} do
+              = f.label :condition_id, class: 'sell-collection_select__label' do
+                = f.collection_select :condition_id, Condition.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select__input', id: 'pref-select', required: "required"}
 
                 %i.fas.fa-chevron-down
             .error-messages#error-condition
@@ -90,7 +91,8 @@
                 %span.sell-title__require
                   必須
             .sell-collection_select
-              = f.label :deliverycost_id, {class: 'sell-collection_select__label'} do
+              = f.label :charge_id, class: 'sell-collection_select__label' do
+                = f.collection_select :charge_id, Charge.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select__input', id: 'pref-select', required: "required"}
 
                 %i.fas.fa-chevron-down
             .error-messages#error-deliverycost
@@ -112,7 +114,8 @@
                 %span.sell-title__require
                   必須
             .sell-collection_select
-              = f.label :days_id, class: 'sell-collection_select__label' do
+              = f.label :day_id, class: 'sell-collection_select__label' do
+                = f.collection_select :day_id, Day.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select__input', id: 'pref-select', required: "required"}
 
                 %i.fas.fa-chevron-down
             .error-messages#error-delivery_days
