@@ -11,7 +11,7 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.references :day,        type: :integer, null:false
       t.references :seller,     type: :integer, null:false
       t.references :order,      type: :integer
-      t.references :category,   type: :integer, null:false
+      t.references :category,   type: :integer
       t.references :brand,      type: :integer
       t.timestamps
     end
