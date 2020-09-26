@@ -41,12 +41,8 @@
           %tr
             %th
               カテゴリー
-            %td.category
-              = link_to "" do
-                .category
-                  %span
-                    = @category_name
-                    //中分類、小分類を表示するコードを記述
+            %td=@item.category.name
+              
           %tr
             %th
               ブランド

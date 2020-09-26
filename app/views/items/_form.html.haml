@@ -1,0 +1,8 @@
+.append__category
+  .category
+    .form__label
+      .level__name
+        カテゴリー
+      .level__Required
+        [必須]
+    =f.collection_select :category_id, @category_parent_array, :id, :name,{ include_blank: "選択して下さい"},class:"secret_field"
