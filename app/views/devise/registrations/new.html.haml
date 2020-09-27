@@ -49,7 +49,7 @@
           %label.register-form__content__box__label  お名前（全角）
           %span.register-form__content__box__require 必須
           .registar-form__content__box--two-field
-            = f.text_field :last_name, placeholder: "例）山田", class: "two-field-a"  
+            = f.text_field :last_name, placeholder: "例) 山田", class: "two-field-a"  
             = f.text_field :first_name, placeholder: "例) 太郎", class: "two-field-b"
           = render partial: 'devise/shared/error_messages', locals: { column: :last_name, input: @user }
           = render partial: 'devise/shared/error_messages', locals: { column: :first_name, input: @user }
@@ -58,7 +58,7 @@
           %label.register-form__content__box__label  フリガナ（全角）
           %span.register-form__content__box__require 必須
           .registar-form__content__box--two-field
-            = f.text_field :last_kana, placeholder: "例）ヤマダ", class: "two-field-a"  
+            = f.text_field :last_kana, placeholder: "例) ヤマダ", class: "two-field-a"  
             = f.text_field :first_kana, placeholder: "例) タロウ", class: "two-field-b" 
           = render partial: 'devise/shared/error_messages', locals: { column: :last_kana, input: @user }
           = render partial: 'devise/shared/error_messages', locals: { column: :first_kana, input: @user }
