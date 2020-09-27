@@ -70,4 +70,4 @@
             != sprintf(f.date_select(:birthday,use_month_numbers:true, prompt:"--", start_year:Time.now.year, end_year:1920, date_separator:'%s'),'年','月')+'日'
           = render partial: 'devise/shared/error_messages', locals: { column: :birthday, input: @user }
         .register-form__content__submit
-          = f.submit "次へ", class: "single-move-button"  
+          = f.submit "次へ進む", class: "single-move-button"  
