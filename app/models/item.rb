@@ -5,9 +5,9 @@ class Item < ApplicationRecord
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :day
 
-  belongs_to :user
-  belongs_to :category
-  belongs_to :brand
+  #belongs_to :user
+  belongs_to :category, optional: true
+  belongs_to :brand, optional: true
   has_many :images
   has_one :seller
   has_one :order
