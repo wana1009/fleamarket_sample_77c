@@ -13,8 +13,11 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-    item.destroy
+    if current_user.id == @item.seller_id && @item.destroy
+      render template: "items/destroy"
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   private
