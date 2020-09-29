@@ -59,7 +59,8 @@
             %th
               ブランド
             %td
-              = @brand.name
+              = @brand.name rescue ""
+              %tr
           %tr
             %th
               商品の状態
@@ -82,12 +83,10 @@
               = @item.day.name
       .container__product-details__message
         -if user_signed_in? && current_user.id == @item.seller.user_id
-          = link_to "商品の編集", '#', class: "submit-btn submit-btn-red"
-          -# = link_to "商品の編集", edit_item_path, class: "submit-btn submit-btn-red"
-          %p
-            or
-          = link_to "この商品を削除する", item_path(@item), method: :delete, class: "item-delete-btn"
-          -# = link_to "この商品を削除する", item_path, class: "submit-btn-gray", method: "DELETE"
+          .container__product-details__message__edit-item
+            = link_to "商品の編集", '#', class: "submit-btn submit-btn-red"
+          .container__product-details__message__delete-item
+            = link_to "この商品を削除する", item_path(@item), method: :delete
         - else 
           = link_to "購入画面に進む", '#', class: "container__item-details__purchase-screen-button"
           -# = link_to "購入画面に進む", new_item_purchase_path(@item), class: "container__item-details__purchase-screen-button"

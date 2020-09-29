@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:edit, :show]
+  before_action :set_item, only: [:edit, :show, :destroy]
   def index
     @items = Item.all.includes(:images)
   end
@@ -17,6 +17,16 @@ class ItemsController < ApplicationController
     item.destroy
   end
 
+
+  def destroy
+    if current_user.id == @item.user_id && @item.destroy
+      render template: "items/destroy"
+    else
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  
   private
   def set_item
     @item = Item.find(params[:id])
