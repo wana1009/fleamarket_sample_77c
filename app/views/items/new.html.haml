@@ -18,9 +18,8 @@
           .sell-container__content__upload
             .sell-container__content__upload__items
               .sell-container__content__upload__items__box
-                = form_for @item do |f|
-                  = f.fields_for :images do |i|
-                    = i.file_field :url
+                = f.fields_for :images do |i|
+                  = i.file_field :url
 
         -#商品名部分
         .sell-container__content
