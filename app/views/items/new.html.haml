@@ -18,15 +18,9 @@
           .sell-container__content__upload
             .sell-container__content__upload__items
               .sell-container__content__upload__items__box
-                %ul#output-box
-                  %div#image-input{tabindex:"0"}
-                    = f.label :images, for: "item_images0", class: 'sell-container__content__upload__items__box__label', data: {label_id: 0 } do 
-                      = f.file_field :images, multiple: true, class: "sell-container__content__upload__items__box__input", id: "item_images0", style: 'display: none;'
-                      %pre
-                        %i.fas.fa-camera.fa-lg
-                        ドラッグアンドドロップ
-                        またはクリックしてファイルをアップロード
-          .error-messages#error-image
+                = form_for @item do |f|
+                  = f.fields_for :images do |i|
+                    = i.file_field :url
 
         -#商品名部分
         .sell-container__content
