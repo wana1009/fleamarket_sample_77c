@@ -11,7 +11,7 @@ FactoryBot.define do
     day_id         {"1"}
     seller_id      {"1"}
     order_id       {"1"}
-    category_id    {"1"}
-    brand_id       {"1"}
+    # category_id    {"1"}
+    # brand_id       {"1"}
   end    
 end
