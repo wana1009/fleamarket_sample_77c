@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @item.seller.new
     # @category_parent = Category.where
   end
   
@@ -18,7 +19,7 @@ class ItemsController < ApplicationController
   end
   
   def create
-    # binding.pry
+    binding.pry
     @item = Item.new(item_params)
     if @item.save
       redirect_to root_path
@@ -42,7 +43,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :detail, :category_id, :brand_id, :condition_id, :charge_id, :prefecture_id, :day_id, :price).merge(seller_id: current_user.id)
+    params.require(:item).permit(:name, :detail, :category_id, :brand_id, :condition_id, :charge_id, :prefecture_id, :day_id, :price, seller_attributes: []).merge(seller_id: current_user.id)
   end
 
 end
