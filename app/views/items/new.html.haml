@@ -5,7 +5,7 @@
   -#メイン部分
   %main
     %section.sell-container
-      = form_with model: @item do |f|
+      = form_for @item do |f|
 
         -# 画像部分
         .sell-container__content
@@ -18,8 +18,12 @@
           .sell-container__content__upload
             .sell-container__content__upload__items
               .sell-container__content__upload__items__box
-                = f.fields_for :images do |i|
-                  = i.file_field :url
+                #image-box
+                  = f.fields_for :images do |i|
+                    .js-file_group{"data-index" => "#{image.index}"}
+                      = i.file_field :url, class:'js-file'
+                      %span.js-remove 削除
+
 
         -#商品名部分
         .sell-container__content
