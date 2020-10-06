@@ -7,7 +7,6 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.images.new
-    # @category_parent = Category.where
   end
   
   def category_children
@@ -43,7 +42,6 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :detail, :category_id, :condition_id, :charge_id, :prefecture_id, :day_id, :price, images_attributes: [:url] ).merge(seller_id: current_user.id)
-    # params.require(:item).permit(:name, :text, :category_id, :condition_id, :charge_id, :prefecture_id, :day_id, :price, images: []).merge(user_id: current_user.id, boughtflg_id:"1")
   end
 
 end
