@@ -2,12 +2,12 @@
   %header.sell-header
     = link_to root_path do
       = image_tag 'logo.png', alt: 'mercari', height: '49', width: '185'
-  -#メイン部分
+
   %main
     %section.sell-container
-      = form_with model: @item do |f|
+      = form_for @item do |f|
 
-        -# 画像部分
+
         .sell-container__content
           .sell-title
             %h3.sell-title__text
@@ -18,17 +18,18 @@
           .sell-container__content__upload
             .sell-container__content__upload__items
               .sell-container__content__upload__items__box
-                %ul#output-box
-                  %div#image-input{tabindex:"0"}
-                    = f.label :images, for: "item_images0", class: 'sell-container__content__upload__items__box__label', data: {label_id: 0 } do 
-                      = f.file_field :images, multiple: true, class: "sell-container__content__upload__items__box__input", id: "item_images0", style: 'display: none;'
-                      %pre
-                        %i.fas.fa-camera.fa-lg
-                        ドラッグアンドドロップ
-                        またはクリックしてファイルをアップロード
-          .error-messages#error-image
+                #image-box
+                  #previews
+                    - if @item.persisted?
+                      - @item.images.each_with_index do |image, i|
+                        = image_tag image.url.url, data: { index: i }, width: "100", height: '100'
+                  = f.fields_for :images do |image|
+                    .js-file_group{"data-index" => "#{image.index}"}
+                      = image.file_field :url, class:'js-file'
+                      %span.js-remove 削除
 
-        -#商品名部分
+
+
         .sell-container__content
           .sell-title
             %h3.sell-title__text
@@ -51,7 +52,7 @@
             &#47;1000
           .error-messages#error-text
 
-        -# 詳細部分
+
         .sell-container__content
           %h3.sell-sub-head 商品の詳細
           .sell-container__content__details
@@ -88,7 +89,7 @@
                 %i.fas.fa-chevron-down
             .error-messages#error-condition
 
-        -# 配送部分
+
         .sell-container__content
           %h3.sell-sub-head
             %p 配送について
@@ -130,7 +131,7 @@
                 %i.fas.fa-chevron-down
             .error-messages#error-delivery_days
 
-        -# 価格部分
+
         .sell-container__content
           %h3.sell-sub-head
             %p 販売価格(300〜9,999,999)

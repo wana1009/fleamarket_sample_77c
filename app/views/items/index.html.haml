@@ -114,7 +114,7 @@
               .productList
                 = link_to root_path do
                   %figure.productList--img
-                    = image_tag image.url
+                    = image_tag image.url.url
                   .productList--body
                     %h3.name
                       #{item.name}
@@ -136,7 +136,7 @@
               .productList
                 = link_to root_path do
                   %figure.productList--img
-                    = image_tag image.url
+                    = image_tag image.url.to_s
                   .productList--body
                     %h3.name
                       #{item.name}
