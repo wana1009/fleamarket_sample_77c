@@ -20,4 +20,5 @@ class Item < ApplicationRecord
   validates :charge_id, presence: true
   validates :prefecture_id, presence: true
   validates :day_id, presence: true
+
 end
