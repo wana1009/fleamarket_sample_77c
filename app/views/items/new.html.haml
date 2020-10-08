@@ -6,6 +6,7 @@
   %main
     %section.sell-container
       = form_for @item do |f|
+        = render 'layouts/error_messages', model: f.object
 
 
         .sell-container__content
