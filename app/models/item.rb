@@ -21,5 +21,6 @@ class Item < ApplicationRecord
   validates :prefecture_id, presence: true
   validates :day_id, presence: true
 
+
   accepts_nested_attributes_for :images, allow_destroy: true
 end
