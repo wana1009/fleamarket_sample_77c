@@ -17,5 +17,10 @@ CarrierWave.configure do |config|
   end
 
   config.fog_directory  = 'chatspace20201009'
-  config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/chatspace20201009'
+
+  if Rails.env.development? || Rails.env.test?
+    config.asset_host = 'http://localhost:3000'
+  else
+    config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/chatspace20201009'
+  end
 end

@@ -1,9 +1,11 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  
   belongs_to_active_hash :condition
   belongs_to_active_hash :charge
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :day
+
 
   belongs_to :user, optional: true
   belongs_to :category, optional: true
@@ -15,8 +17,13 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :detail, presence: true
   validates :price, presence: true
-  validates :condition, presence: true
-  validates :charge, presence: true
-  validates :prefecture, presence: true
-  validates :day, presence: true
+  validates :condition_id, presence: true
+  validates :charge_id, presence: true
+  validates :prefecture_id, presence: true
+  validates :day_id, presence: true
+
+
+  accepts_nested_attributes_for :images, allow_destroy: true
+  validates_associated :images
+  validates :images, presence: true
 end
