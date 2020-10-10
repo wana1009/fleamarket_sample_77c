@@ -75,7 +75,7 @@
                   任意
             .sell-collection_select
               = f.label :cbrand_id, {class: 'sell-collection_select__label'} do
-                = f.collection_select :brand_id, Brand.all, :id, :name, {prompt: "選択して下さい"},{ class: 'sell-collection_select__input', id: 'brand-select', required: "required"}
+                = f.collection_select :brand_id, Brand.all, :id, :name, {prompt: "選択して下さい"},{ class: 'sell-collection_select__input'}
                 %i.fas.fa-chevron-down
             .error-messages#error-brand
 
