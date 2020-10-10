@@ -8,8 +8,7 @@ Rails.application.routes.draw do
   end
   root to: 'items#index'
 
-  resources :items, only: [:new, :index, :show, :create, :destroy]
-  resources :items do
+  resources :items, only: [:new, :index, :show, :create, :destroy] do
 
     collection do
       get 'search'
