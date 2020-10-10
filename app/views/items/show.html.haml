@@ -11,11 +11,11 @@
           %ul.container__item-details__main__images__display__up
             - @item.images.each do |image|
               %li.container__item-details__main__images__display__up__slide-image
-                = image_tag image.url, size: "300x300"
+                = image_tag image.url.url, size: "300x300"
           %ul.container__product-details__main__images__display__down
             - @item.images.each do |image|
               %li.container__item-details__main__images__display__down__thumbnail-image
-                = image_tag image.url, size: "60x60"
+                = image_tag image.url.url, size: "60x60"
 
       .container__item-details__price
         %span.container__item-details__price__amount
