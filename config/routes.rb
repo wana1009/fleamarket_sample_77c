@@ -7,7 +7,10 @@ Rails.application.routes.draw do
     post 'addresses', to: 'users/registrations#create_address'
   end
   root to: 'items#index'
-  resources :items, only: [:new, :index, :show, :create] do
+
+  resources :items, only: [:new, :index, :show, :create, :destroy]
+  resources :items do
+
     collection do
       get 'search'
       get 'get_category_child', to: 'items#get_category_child'
