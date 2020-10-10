@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
     @item = Item.new
     @item.images.new
     @seller = Seller.new
-    # @category_parent = Category.where
 
   end
   
