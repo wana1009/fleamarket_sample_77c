@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
     @item = Item.new
     @item.images.new
     @seller = Seller.new
-
   end
   
   def category_children
@@ -50,6 +49,18 @@ class ItemsController < ApplicationController
     end
   end
 
+  def edit
+    if current_user.id == @item.seller_id
+      render template: "items/edit"
+    else
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def update
+    item.update(item_params)
+  end
+
   private
   def set_item
     @item = Item.find(params[:id])
@@ -57,7 +68,6 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :detail, :category_id, :condition_id, :charge_id, :prefecture_id, :day_id, :price, images_attributes: [:url] ).merge(seller_id: current_user.id)
-
   end
 
 end
