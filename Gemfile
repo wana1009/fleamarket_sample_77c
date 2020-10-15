@@ -82,3 +82,4 @@ gem 'fog-aws'
 gem "aws-sdk-s3", require: false
 gem 'ancestry'
 gem 'jquery-rails'
+gem 'font-awesome-sass'

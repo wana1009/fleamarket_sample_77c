@@ -1,6 +1,10 @@
-@import "reset";
-@import "items";
-@import "show";
+@import "sessions/reset";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "sessions/variables";
+@import "sessions/items";
+@import "sessions/show";
+@import "sessions/mypage";
 @import "registrations/new";
 @import "sessions/new";
 
