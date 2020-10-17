@@ -41,10 +41,15 @@
           %tr
             %th
               カテゴリー
-            %td.category
-              = @item.category.name
-              //= @item.category_children
-              //= @item.category_grandchildren
+            %td
+              %ul.category
+                %li
+                  = @category_parent.name
+                %li
+                  = @category_children.name
+                %li
+                  = @category_grandchildren.name
+              
           %tr
             %th
               ブランド

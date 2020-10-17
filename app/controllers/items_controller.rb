@@ -41,6 +41,10 @@ class ItemsController < ApplicationController
     @category = @item.category
     @brand = @item.brand
     @images = @item.images
+    @category_id = @item.category_id
+    @category_parent = Category.find(@category_id).parent.parent
+    @category_children = Category.find(@category_id).parent
+    @category_grandchildren = Category.find(@category_id)
   end
 
   def destroy
