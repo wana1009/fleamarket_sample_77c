@@ -16,5 +16,7 @@ Rails.application.routes.draw do
       get 'get_category_grandchild', to: 'items#get_category_grandchild'
     end
   end
+
+  resources :users, only: :show
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

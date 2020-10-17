@@ -115,5 +115,9 @@
                         %li
                           #{item.price}円
                       %p (税込)
+= link_to new_item_path(@item) do
+  .purchaseBtn
+    %span.purchaseBtn__text 出品する
+    = image_tag("icon_camera.png", class: "purchaseBtn__icon")
 = render "items/footer"
 
