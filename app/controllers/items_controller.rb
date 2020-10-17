@@ -8,15 +8,16 @@ class ItemsController < ApplicationController
     @item = Item.new
     @item.images.new
     @seller = Seller.new
-
+    @category_parent_array = ["---"]
+    @category_parent_array = Category.where(ancestry: nil)
   end
   
-  def category_children
-    @category_children = Category.find("#{params[:parent_id]}").children
+  def get_category_children
+    @category_children = Category.find(params[:parent_id]).children
   end
   
-  def category_grandchildren
-    @category_grandchildren = Category.find("#{params[:child_id]}").children
+  def get_category_grandchildren
+    @category_grandchildren = Category.find(params[:child_id]).children
   end
   
   def create

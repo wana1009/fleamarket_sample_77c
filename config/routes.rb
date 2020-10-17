@@ -12,8 +12,8 @@ Rails.application.routes.draw do
 
     collection do
       get 'search'
-      get 'get_category_child', to: 'items#get_category_child'
-      get 'get_category_grandchild', to: 'items#get_category_grandchild'
+      get 'items/get_category_children', to: 'items#get_category_children', defaults: { format: 'json' }
+      get 'items/get_category_grandchildren', to: 'items#get_category_grandchildren', defaults: { format: 'json' }
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
