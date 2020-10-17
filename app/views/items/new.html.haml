@@ -1,7 +1,6 @@
 .sell
   %header.sell-header
-    = link_to root_path do
-      = image_tag 'logo.png', alt: 'mercari', height: '49', width: '185'
+    = link_to image_tag("logo.png"), root_path 
 
   %main
     %section.sell-container
@@ -15,7 +14,7 @@
               出品画像
               %span.sell-title__require
                 必須
-          .sell-container__content__max-sheet 最大10枚までアップロードできます
+          .sell-container__content__max-sheet 最大5枚までアップロードできます
           .sell-container__content__upload
             .sell-container__content__upload__items
               .sell-container__content__upload__items__box
@@ -37,7 +36,7 @@
               商品名
               %span.sell-title__require
                 必須
-          = f.text_field :name, {class:'sell-container__content__name', required: "required", placeholder: '商品名（必須 40文字まで)'}
+          = f.text_field :name, {class:'sell-container__content__name', required: "required", placeholder: '40文字まで'}
           .error-messages#error-name
 
           .sell-title
@@ -45,12 +44,8 @@
               商品の説明
               %span.sell-title__require
                 必須
-          = f.text_area :detail,{class: 'sell-container__content__detail', required: "required", rows: '7', maxlength: '1000'}
-
-          .sell-container__content__word-count
-            %span#word-count
-              0
-            &#47;1000
+          .sell-textbox
+          = f.text_area :detail, {cols: "86", class: 'sell-container__content__detail', required: "required", rows: '10', maxlength: '1000'}
           .error-messages#error-text
 
 
@@ -71,7 +66,7 @@
             .sell-title
               %h3.sell-title__text
                 ブランド
-                %span.sell-title__require
+                %span.sell-title__any
                   任意
             .sell-collection_select_brand
               = f.label :cbrand_id, {class: 'sell-collection_select_brand__label'} do
@@ -135,7 +130,7 @@
 
         .sell-container__content
           %h3.sell-sub-head
-            %p 販売価格(300〜9,999,999)
+            %p 販売価格
             = link_to '/price',target: '_blank', class: 'sell-sub-head__guides-link' do
               %i.far.fa-question-circle
           .sell-container__content__price
