@@ -12,7 +12,7 @@ $(document).on('turbolinks:load', function(){
                           <div class='sell-collection_select1'>
                             <i class='fas fa-chevron-down sell-collection_select--arrow-down'></i>
                             <select class="sell-collection_select--select" id="child_category" name="item[category_id]">
-                              <option value="---" data-category="---">---</option>
+                              <option value="選択して下さい" data-category="選択して下さい">選択して下さい</option>
                               ${insertHTML}
                             <select>
                           </div>
@@ -27,7 +27,7 @@ $(document).on('turbolinks:load', function(){
                                 <div class='sell-collection_select2'>
                                   <i class='fas fa-chevron-down sell-collection_select--arrow-down'></i>
                                   <select class="sell-collection_select__box--select" id="grandchild_category" name="item[category_id]">
-                                    <option value="---" data-category="---">---</option>
+                                    <option value="選択して下さい" data-category="選択して下さい">選択して下さい</option>
                                     ${insertHTML}
                                   </select>
                                 </div>
@@ -39,7 +39,7 @@ $(document).on('turbolinks:load', function(){
     $('#parent_category').on('change', function(){
       var parent_category_id = document.getElementById
       ('parent_category').value; //選択された親カテゴリーの名前を取得
-      if (parent_category_id != "---"){ //親カテゴリーが初期値でないことを確認
+      if (parent_category_id != "選択して下さい"){ //親カテゴリーが初期値でないことを確認
         $.ajax({
           url: '/items/get_category_children',
           type: 'GET',
@@ -67,9 +67,9 @@ $(document).on('turbolinks:load', function(){
     // 子カテゴリー選択後のイベント
     $('.sell-container__content__details').on('change', '#child_category', function(){
       var child_category_id = $('#child_category option:selected').data('category'); //選択された子カテゴリーのidを取得
-      if (child_category_id != "---"){ //子カテゴリーが初期値でないことを確認
+      if (child_category_id != "選択して下さい"){ //子カテゴリーが初期値でないことを確認
         $.ajax({
-          url: '/items/category/get_category_grandchildren',
+          url: '/items/get_category_grandchildren',
           type: 'GET',
           data: { child_id: child_category_id },
           dataType: 'json'
