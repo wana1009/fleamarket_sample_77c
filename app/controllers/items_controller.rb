@@ -8,7 +8,6 @@ class ItemsController < ApplicationController
     @item = Item.new
     @item.images.new
     @seller = Seller.new
-    @category_parent_array = ["選択して下さい"]
     @category_parent_array = Category.where(ancestry: nil)
   end
   
@@ -41,10 +40,9 @@ class ItemsController < ApplicationController
     @category = @item.category
     @brand = @item.brand
     @images = @item.images
-    @category_id = @item.category_id
-    @category_parent = Category.find(@category_id).parent.parent
-    @category_children = Category.find(@category_id).parent
-    @category_grandchildren = Category.find(@category_id)
+    @category_grandchildren = @item.category
+    @category_children = @category_grandchildren.parent
+    @category_parent = @category_children.parent  
   end
 
   def destroy
