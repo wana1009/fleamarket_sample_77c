@@ -1,7 +1,7 @@
 .sell
   %header.sell-header
     = link_to root_path do
-      = image_tag 'logo.png', alt: 'mercari', height: '49', width: '185'
+      = image_tag 'logo.png', alt: 'mercari', height: '49'
 
   %main
     %section.sell-container
@@ -153,3 +153,4 @@
           .submit-btn
             = f.submit '出品する', class: 'submit-btn__sell-btn'
             = link_to 'もどる', root_path, class: 'submit-btn__return-btn'
+= render "items/footer"
