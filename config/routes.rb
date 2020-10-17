@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'orders/index'
+  get 'orders/done'
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
@@ -15,6 +17,13 @@ Rails.application.routes.draw do
       get 'get_category_child', to: 'items#get_category_child'
       get 'get_category_grandchild', to: 'items#get_category_grandchild'
     end
+
+    resources :orders, only: [:index] do
+      collection do
+        get 'done', to: 'orders#done'
+        post 'pay', to: 'orders#pay'
+      end
+    end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -23,5 +32,4 @@ Rails.application.routes.draw do
       post 'pay', to: 'cards#pay'
     end
   end
-  
 end

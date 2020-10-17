@@ -3,7 +3,7 @@
   clear: both;
   display: block;
 }
-.lists{
+.l{
   max-width:1200px;
   width: 100%;
   margin: 40px 0px 40px 100px;
@@ -63,10 +63,8 @@
         .signup-card-list {
           margin: 8px 0 0;
           font-size: 0;
-        }
-         ul {
           list-style: none;
-          display: block;
+          display: flex;
           margin-block-start: 1em;
           margin-block-end: 1em;
           margin-inline-start: 0px;
