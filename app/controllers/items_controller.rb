@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
     @item = Item.new
     @item.images.new
     @seller = Seller.new
-    @category_parent_array = ["---"]
+    @category_parent_array = ["選択して下さい"]
     @category_parent_array = Category.where(ancestry: nil)
   end
   
