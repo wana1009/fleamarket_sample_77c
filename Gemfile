@@ -83,3 +83,4 @@ gem "aws-sdk-s3", require: false
 gem 'ancestry'
 gem 'jquery-rails'
 gem 'payjp'
+gem 'dotenv-rails'
