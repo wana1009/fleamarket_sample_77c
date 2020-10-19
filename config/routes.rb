@@ -21,15 +21,11 @@ Rails.application.routes.draw do
     resources :orders, only: [:index] do
       collection do
         get 'done', to: 'orders#done'
-        post 'pay', to: 'orders#pay'
       end
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :cards, only: [:new, :show, :destroy] do
-    collection do
-      post 'pay', to: 'cards#pay'
-    end
+  resources :cards, only: [:new, :create, :show, :destroy] do
   end
 end
