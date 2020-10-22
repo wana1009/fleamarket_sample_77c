@@ -29,4 +29,5 @@
 public/uploads/*
 .DS_Store
 
-.env
+#　環境変数を設定をしたため
+/.env

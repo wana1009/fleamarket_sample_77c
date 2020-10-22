@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'card/new'
+  get 'card/show'
   get 'orders/index'
   get 'orders/done'
   devise_for :users, controllers: {
@@ -26,6 +28,22 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :cards, only: [:new, :create, :show, :destroy] do
+  resources :card, only: [:new, :show] do
+    collection do
+      post 'show', to: 'card#show'
+      post 'pay', to: 'card#pay'
+      post 'delete', to: 'card#delete'
+    end
+  end
+
+  resources :cards, only: [:create, :new, :show, :destroy] do
+    member do
+      post 'show', to: 'cards#show'
+      get  'show', to: 'cards#show'
+      delete 'destroy', as: 'destroy'
+    end
+    collection do
+      get  'confirmation'
+    end
   end
 end
