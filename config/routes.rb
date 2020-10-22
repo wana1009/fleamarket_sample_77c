@@ -20,21 +20,14 @@ Rails.application.routes.draw do
       get 'get_category_grandchild', to: 'items#get_category_grandchild'
     end
 
-    resources :orders, only: [:index] do
+    resources :buyers, only: [:index] do
       collection do
-        get 'done', to: 'orders#done'
+        get 'done', to: 'buyers#done'
+        post 'pay', to: 'buyers#pay'
       end
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-  resources :card, only: [:new, :show] do
-    collection do
-      post 'show', to: 'card#show'
-      post 'pay', to: 'card#pay'
-      post 'delete', to: 'card#delete'
-    end
-  end
 
   resources :cards, only: [:create, :new, :show, :destroy] do
     member do
