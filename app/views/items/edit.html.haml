@@ -1,7 +1,6 @@
 .sell
   %header.sell-header
-    = link_to root_path do
-      = image_tag 'logo.png', alt: 'mercari', height: '49', width: '185'
+    = link_to image_tag("logo.png"), root_path 
 
   %main
     %section.sell-container
@@ -15,7 +14,7 @@
               出品画像
               %span.sell-title__require
                 必須
-          .sell-container__content__max-sheet 最大10枚までアップロードできます
+          .sell-container__content__max-sheet 最大5枚までアップロードできます
           .sell-container__content__upload
             .sell-container__content__upload__items
               .sell-container__content__upload__items__box
@@ -29,7 +28,7 @@
                       = image.file_field :url, class:'js-file'
                       %span.js-remove 削除
 
-
+                
 
         .sell-container__content
           .sell-title
@@ -37,7 +36,7 @@
               商品名
               %span.sell-title__require
                 必須
-          = f.text_field :name, {class:'sell-container__content__name', required: "required", placeholder: '商品名（必須 40文字まで)'}
+          = f.text_field :name, {class:'sell-container__content__name', required: "required", placeholder: '40文字まで'}
           .error-messages#error-name
 
           .sell-title
@@ -45,12 +44,8 @@
               商品の説明
               %span.sell-title__require
                 必須
-          = f.text_area :detail,{class: 'sell-container__content__detail', required: "required", rows: '7', maxlength: '1000'}
-
-          .sell-container__content__word-count
-            %span#word-count
-              0
-            &#47;1000
+          .sell-textbox
+          = f.text_area :detail, {cols: "86", class: 'sell-container__content__detail', required: "required", rows: '10', maxlength: '1000'}
           .error-messages#error-text
 
 
@@ -64,18 +59,24 @@
                   必須
             .sell-collection_select
               = f.label :category_id, {class: 'sell-collection_select__label'} do
-                = f.collection_select :category_id, Category.all, :id, :name, {prompt: "選択して下さい"},{ class: 'sell-collection_select__input', id: 'category-select', required: "required"}
+                = f.collection_select @category_id, Category.roots, :id, :name ,{prompt: "選択してください", selected: @parent_array},{id: 'parent_category'}
                 %i.fas.fa-chevron-down
+                .sell-collection_select__added
+                %i.fas.fa-chevron-down
+                = f.collection_select @category_id, @item.category.parent.parent.children, :id, :name ,{prompt: "選択してください", selected: @category_children_array},{class: 'sell-collection_select1', id: 'children_wrapper'}
+                .sell-collection_select__added
+                %i.fas.fa-chevron-down
+                = f.collection_select @category_id, @item.category.parent.children, :id, :name ,{prompt: "選択してください", selected: @category_grandchildren_array},{id: 'grandchildren_wrapper'}
             .error-messages#error-category
-          
+
             .sell-title
               %h3.sell-title__text
                 ブランド
-                %span.sell-title__require
+                %span.sell-title__any
                   任意
-            .sell-collection_select
-              = f.label :cbrand_id, {class: 'sell-collection_select__label'} do
-                = f.collection_select :brand_id, Brand.all, :id, :name, {prompt: "選択して下さい"},{ class: 'sell-collection_select__input'}
+            .sell-collection_select_brand
+              = f.label :cbrand_id, {class: 'sell-collection_select_brand__label'} do
+                = f.collection_select :brand_id, Brand.all, :id, :name, {prompt: "選択して下さい"},{ class: 'sell-collection_select_brand__input'}
                 %i.fas.fa-chevron-down
             .error-messages#error-brand
 
@@ -84,9 +85,9 @@
                 商品の状態
                 %span.sell-title__require
                   必須
-            .sell-collection_select
-              = f.label :condition_id, {class: 'sell-collection_select__label'} do
-                = f.collection_select :condition_id, Condition.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select__input', id: 'condition-select', required: "required"}
+            .sell-collection_select_condition
+              = f.label :condition_id, {class: 'sell-collection_select_condition__label'} do
+                = f.collection_select :condition_id, Condition.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select_condition__input', id: 'condition-select', required: "required"}
                 %i.fas.fa-chevron-down
             .error-messages#error-condition
 
@@ -102,9 +103,9 @@
                 配送料の負担
                 %span.sell-title__require
                   必須
-            .sell-collection_select
-              = f.label :charge_id, class: 'sell-collection_select__label' do
-                = f.collection_select :charge_id, Charge.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select__input', id: 'charge-select', required: "required"}
+            .sell-collection_select_charge
+              = f.label :charge_id, class: 'sell-collection_select_charge__label' do
+                = f.collection_select :charge_id, Charge.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select_charge__input', id: 'charge-select', required: "required"}
 
                 %i.fas.fa-chevron-down
             .error-messages#error-deliverycost
@@ -114,9 +115,9 @@
                 発送元の地域
                 %span.sell-title__require
                   必須
-            .sell-collection_select
-              = f.label :prefecture_id, class: 'sell-collection_select__label' do
-                = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select__input', id: 'pref-select', required: "required"}
+            .sell-collection_select_prefecture
+              = f.label :prefecture_id, class: 'sell-collection_select_prefecture__label' do
+                = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select_prefecture__input', id: 'pref-select', required: "required"}
                 %i.fas.fa-chevron-down
             .error-messages#error-pref
 
@@ -125,9 +126,9 @@
                 発送までの日数
                 %span.sell-title__require
                   必須
-            .sell-collection_select
-              = f.label :day_id, class: 'sell-collection_select__label' do
-                = f.collection_select :day_id, Day.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select__input', id: 'day-select', required: "required"}
+            .sell-collection_select_day
+              = f.label :day_id, class: 'sell-collection_select_day__label' do
+                = f.collection_select :day_id, Day.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select_day__input', id: 'day-select', required: "required"}
 
                 %i.fas.fa-chevron-down
             .error-messages#error-delivery_days
@@ -135,7 +136,7 @@
 
         .sell-container__content
           %h3.sell-sub-head
-            %p 販売価格(300〜9,999,999)
+            %p 販売価格
             = link_to '/price',target: '_blank', class: 'sell-sub-head__guides-link' do
               %i.far.fa-question-circle
           .sell-container__content__price
@@ -147,10 +148,9 @@
             .sell-container__content__price__form
               = f.label :price, class: 'sell-container__content__price__form__label' do
                 ¥
-                = f.number_field :price, {placeholder: '0', value: '', autocomplete:"off", class: 'sell-container__content__price__form__box', required: "required"}
+                = f.number_field :price, {placehplder:"#{@item.price}", autocomplete:"off", class: 'sell-container__content__price__form__box', required: "required"}
           .error-messages#error-price
 
           .submit-btn
             = f.submit '出品する', class: 'submit-btn__sell-btn'
             = link_to 'もどる', root_path, class: 'submit-btn__return-btn'
-            = link_to '削除する', "/items/#{@item.id}", method: :delite
