@@ -79,7 +79,7 @@
       .container__product-details__message
         -if user_signed_in? && current_user.id == @item.seller.user_id
           .container__product-details__message__edit-item
-            = link_to "商品の編集", '#', class: "submit-btn submit-btn-red"
+            = link_to "商品の編集", edit_item_path(@item), class: "submit-btn submit-btn-red"
           .container__product-details__message__delete-item
             = link_to "この商品を削除する", item_path(@item), method: :delete
         - else 
