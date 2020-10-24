@@ -20,10 +20,18 @@ Rails.application.routes.draw do
       get 'get_category_grandchild', to: 'items#get_category_grandchild'
     end
 
-    resources :buyers, only: [:index] do
-      collection do
-        get 'done', to: 'buyers#done'
-        post 'pay', to: 'buyers#pay'
+  #   # resources :buyers, only: [:index] do
+  #     collection do
+  #       get 'done', to: 'buyers#done'
+  #       post 'pay', to: 'buyers#pay'
+  #     end
+  #   end
+  # end
+
+    resources :orders, only: [:index, :create] do
+      member do
+        get  "buy"
+        post "pay"
       end
     end
   end
@@ -39,4 +47,5 @@ Rails.application.routes.draw do
       get  'confirmation'
     end
   end
+
 end

@@ -79,7 +79,6 @@
             = link_to "商品の編集", '#', class: "submit-btn submit-btn-red"
           .container__product-details__message__delete-item
             = link_to "この商品を削除する", item_path(@item), method: :delete
-        - else 
-          = link_to "購入画面に進む", index_path(@order), class: "container__item-details__purchase-screen-button"
-          -# = link_to "購入画面に進む", new_item_purchase_path(@item), class: "container__item-details__purchase-screen-button"
+        - else
+          = link_to "購入画面に進む",  buy_item_order_path(@item), method: :get, class: "item-purchase-button"
 = render "items/footer"
