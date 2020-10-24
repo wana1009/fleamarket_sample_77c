@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
   end
 
   def buy
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:id])
     @images = @item.images.all
 
     if user_signed_in?
@@ -37,13 +37,13 @@ class OrdersController < ApplicationController
   end
 
   def pay
-    @item = item.find(params[:item_id])
+    @item = Item.find(params[:id])
     @images = @item.images.all
 
     if @item.orders.present?
       redirect_to item_path(@item.id), alert: "売り切れています。"
     else
-      # 二重で購入処理を防ぐ
+      # 二重で決済されるのを防ぐ
       @item.with_lock do
         if current_user.card.present?
           # ログインユーザーがクレジットカード登録済みの場合
