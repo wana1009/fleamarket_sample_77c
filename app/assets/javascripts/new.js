@@ -31,7 +31,7 @@ $(document).on('turbolinks:load', ()=> {
 
 
     if (img = $(`img[data-index="${targetIndex}"]`)[0]) {
-      img.setAttribute('src', blobUrl);
+      img.setAttribute('url', blobUrl);
     } else {  
       $('#previews').append(buildImg(targetIndex, blobUrl));
 
