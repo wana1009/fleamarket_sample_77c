@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:id])
     @images = @item.images.all
 
-    if @item.orders.present?
+    if @item.order.present?
       redirect_to item_path(@item.id), alert: "売り切れています。"
     else
       # 二重で決済されるのを防ぐ
@@ -55,13 +55,13 @@ class OrdersController < ApplicationController
           currency: 'jpy'
           )
         else
-          Payjp::Charge.create(
-          amount: @item.price,
-          card: params['payjp-token'],
-          currency: 'jpy'
-          )
+          # 
+          # Payjp::Charge.create(
+          #   amount: @item.price,
+          #   card: params['payjp-token'],
+          #   currency: 'jpy'
+          # )
         end
-      @order = Order.create(seller_id: current_user.id, item_id: params[:item_id])
       end
     end
   end
