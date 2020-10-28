@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:edit, :show, :destroy]
+  before_action :set_item, only: [:edit, :update, :show, :destroy]
   def index
     @items = Item.all.includes(:images)
   end
@@ -8,15 +8,15 @@ class ItemsController < ApplicationController
     @item = Item.new
     @item.images.new
     @seller = Seller.new
-
+    @category_parent_array = Category.where(ancestry: nil)
   end
   
-  def category_children
-    @category_children = Category.find("#{params[:parent_id]}").children
+  def get_category_children
+    @category_children = Category.find(params[:parent_id]).children
   end
   
-  def category_grandchildren
-    @category_grandchildren = Category.find("#{params[:child_id]}").children
+  def get_category_grandchildren
+    @category_grandchildren = Category.find(params[:child_id]).children
   end
   
   def create
@@ -40,6 +40,9 @@ class ItemsController < ApplicationController
     @category = @item.category
     @brand = @item.brand
     @images = @item.images
+    @category_grandchildren = @item.category
+    @category_children = @category_grandchildren.parent
+    @category_parent = @category_children.parent  
   end
 
   def destroy
@@ -50,6 +53,7 @@ class ItemsController < ApplicationController
     end
   end
 
+
   def pay
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
@@ -57,6 +61,46 @@ class ItemsController < ApplicationController
       :card => params['payjp-token'],
       :currency => 'jpy'
     )
+    
+  def edit
+    if current_user.id == @item.seller_id
+      @category_parent_array = Category.where(ancestry: nil).each do |parent|
+      end
+
+      @user = User.find(@item.seller_id)
+      @images = Image.where(item_id: params[:id])
+      @category_id = @item.category_id
+      @category_parent = Category.find(@category_id).parent.parent
+      @category_child = Category.find(@category_id).parent
+      @category_grandchild = Category.find(@category_id)
+      grandchild = @item.category
+      child = grandchild.parent
+
+      @parent_array = []
+      @parent_array << @item.category.parent.parent.name
+      @parent_array << @item.category.parent.parent.id
+
+      @category_children_array = Category.where(ancestry: child.ancestry)
+      @child_array = []
+      @child_array << child.name
+      @child_array << child.id
+
+      @category_grandchildren_array = Category.where(ancestry: grandchild.ancestry)
+      @grandchild_array = []
+      @grandchild_array << grandchild.name
+      @grandchild_array << grandchild.id
+
+    else
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   private
@@ -65,8 +109,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :detail, :category_id, :condition_id, :charge_id, :prefecture_id, :day_id, :price, images_attributes: [:url] ).merge(seller_id: current_user.id)
-
+    params.require(:item).permit(:name, :detail, :category_id, :condition_id, :charge_id, :prefecture_id, :day_id, :price, images_attributes: [:url, :_destroy, :id] ).merge(seller_id: current_user.id)
   end
 
 end

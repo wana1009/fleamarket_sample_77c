@@ -12,12 +12,12 @@ Rails.application.routes.draw do
   end
   root to: 'items#index'
 
-  resources :items, only: [:new, :index, :show, :create, :destroy] do
+  resources :items do
 
     collection do
       get 'search'
-      get 'get_category_child', to: 'items#get_category_child'
-      get 'get_category_grandchild', to: 'items#get_category_grandchild'
+      get 'get_category_children', defaults: { format: 'json' }
+      get 'get_category_grandchildren', defaults: { format: 'json' }
     end
 
     resource :orders do
@@ -26,7 +26,9 @@ Rails.application.routes.draw do
         post "pay"
       end
     end
+  end
 
+  resources :users, only: :show
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   end
 

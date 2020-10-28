@@ -3,8 +3,8 @@ $(document).on('turbolinks:load', ()=> {
   const buildFileField = (num)=> {
     const html = `<div data-index="${num}" class="js-file_group">
                     <input class="js-file" type="file"
-                    name="product[images_attributes][${num}][src]"
-                    id="product_images_attributes_${num}_src"><br>
+                    name="item[images_attributes][${num}][url]"
+                    id="item_images_attributes_${num}_url"><br>
                     <div class="js-remove">削除</div>
                   </div>`;
     return html;
@@ -31,7 +31,7 @@ $(document).on('turbolinks:load', ()=> {
 
 
     if (img = $(`img[data-index="${targetIndex}"]`)[0]) {
-      img.setAttribute('src', blobUrl);
+      img.setAttribute('url', blobUrl);
     } else {  
       $('#previews').append(buildImg(targetIndex, blobUrl));
 

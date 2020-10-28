@@ -23,8 +23,10 @@
 
       %ul.listsRight
         - if user_signed_in?
-          %h2 ログインしています
-          = link_to "ログアウト", destroy_user_session_path, method: :delete
+          %li.listsRight__item.listsRight__item--mypage
+            = link_to "マイページ", user_path(current_user.id)
+          %li.listsRight__item.listsRight__item--logout
+            = link_to "ログアウト", destroy_user_session_path, method: :delete
         - else
           %li.listsRight__item.listsRight__item--login
             = link_to "ログイン", new_user_session_path
