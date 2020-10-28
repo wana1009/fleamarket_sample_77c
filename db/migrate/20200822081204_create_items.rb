@@ -13,6 +13,7 @@ class CreateItems < ActiveRecord::Migration[5.2]
       t.references :order,      type: :integer
       t.references :category,   type: :integer, null:false
       t.references :brand,      type: :integer
+      # t.boolean    :stock_status,          null: false, default: true
       t.timestamps
     end
   end

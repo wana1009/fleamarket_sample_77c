@@ -1,4 +1,5 @@
 .wrapper
+  = render "items/header"
   .user-card__content
     %h2 クレジットカード情報入力
     = form_tag(cards_path, method: :post, action: "create", id: 'card__form', class: "card__form", name: "inputForm") do
@@ -66,3 +67,4 @@
           カード裏面の番号とは？
         .card__form__content--btn{id: "card_token"}
           = submit_tag "次へ進む", id:"token_submit", class: "btn-red"
+  = render "items/footer"
