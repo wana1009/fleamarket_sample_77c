@@ -61,6 +61,7 @@ class ItemsController < ApplicationController
       :card => params['payjp-token'],
       :currency => 'jpy'
     )
+  end
     
   def edit
     if current_user.id == @item.seller_id
