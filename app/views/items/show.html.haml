@@ -41,12 +41,15 @@
           %tr
             %th
               カテゴリー
-            %td.category
-              = link_to "" do
-                .category
-                  %span
-                    = @category_name
-                    //中分類、小分類を表示するコードを記述
+            %td
+              %ul.category
+                %li
+                  = @category_parent.name
+                %li
+                  = @category_children.name
+                %li
+                  = @category_grandchildren.name
+              
           %tr
             %th
               ブランド
@@ -76,7 +79,7 @@
       .container__product-details__message
         -if user_signed_in? && current_user.id == @item.seller.user_id
           .container__product-details__message__edit-item
-            = link_to "商品の編集", '#', class: "submit-btn submit-btn-red"
+            = link_to "商品の編集", edit_item_path(@item), class: "submit-btn submit-btn-red"
           .container__product-details__message__delete-item
             = link_to "この商品を削除する", item_path(@item), method: :delete
         - else
