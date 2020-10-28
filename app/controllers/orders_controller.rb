@@ -28,7 +28,6 @@ class OrdersController < ApplicationController
         when "Discover"
           @card_src = "discover.png"
         end
-        # viewの記述を簡略化
         @exp_month = @customer_card.exp_month.to_s
         @exp_year = @customer_card.exp_year.to_s.slice(2,3)
       else
@@ -42,10 +41,10 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     @images = @item.images.all
 
-    if @item.order.present?
+
+    if @item.order_id.present?
       redirect_to item_path(@item.id), alert: "売り切れています。"
     else
-      # 同時に2人が同時に購入し、二重で購入処理がされることを防ぐための記述
       @item.with_lock do
         if current_user.card.present?
           @card = Card.find_by(user_id: current_user.id)
@@ -56,16 +55,15 @@ class OrdersController < ApplicationController
           currency: 'jpy'
           )
         else
-          # APIの「Checkout」ライブラリによる決済処理の記述
           Payjp::Charge.create(
           amount: @item.price,
           card: params['payjp-token'], # フォームを送信すると作成・送信されてくるトークン
           currency: 'jpy'
           )
+        @Order = Order.create(user_id: current_user.id, item_id: @item.id)
         end
-      # #購入テーブルに登録処理
-      # @order = Order.create(seller_id: current_user.id, item_id: params[:item_id])
       end
     end
   end
+
 end
