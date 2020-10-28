@@ -1,3 +1,4 @@
+= render "items/header"
 .Mypage-main
   .Mypage-main__contents
     %section.Register
@@ -12,10 +13,6 @@
             JCB、Diners Club、Discover
             %br
           = form_with url: cards_path, method: :post, id: "charge-form", name: "inputForm" do |f|
-            .Register__form__content__group
-              %label.Register__form__content__group__label カード番号
-              %span.Register__form__content__group__necessary 必須
-              = f.text_field :number, name: "card_number", id:"card_number", type: "text", placeholder: '半角数字のみ', class: 'Register__form__content__group__input', maxlength: "16"
             .Register__form__content__group
               %label.Register__form__content__group__label カード番号
               %span.Register__form__content__group__necessary 必須
@@ -38,3 +35,4 @@
               %span.Register__form__content__group__necessary 必須
               = f.text_field :cvc, name: "cvc", id:"cvc", class:"cvc", type: "text", placeholder: 'カード背面4桁もしくは3桁の番号', class: 'Register__form__content__group__input', maxlength: "4"
               = f.submit "追加する", class: "Register__form__content__btn",  id: "token_submit"
+= render "items/footer"
