@@ -3,6 +3,7 @@ FactoryBot.define do
     factory :ard do
       customer_id           {"abe"}
       card_id               {"11"}
-      user_id               ("1")
+      user_id               
+    end
   end
 end
