@@ -28,24 +28,16 @@ Rails.application.routes.draw do
   #   end
   # end
 
-    resources :orders, only: [:index, :create] do
-      member do
-        get  "buy"
-        post "pay"
-      end
-    end
-  end
+  #   resources :orders, only: [:index, :create] do
+  #     member do
+  #       get  "buy"
+  #       post "pay"
+  #     end
+  #   end
+  # end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-  resources :cards, only: [:create, :new, :show, :destroy] do
-    member do
-      post 'show', to: 'cards#show'
-      get  'show', to: 'cards#show'
-      delete 'destroy', as: 'destroy'
-    end
-    collection do
-      get  'confirmation'
-    end
   end
-
+  
+  resources :cards, only: [:new, :create] do
+  end
 end
