@@ -82,7 +82,11 @@
             = link_to "商品の編集", edit_item_path(@item), class: "submit-btn submit-btn-red"
           .container__product-details__message__delete-item
             = link_to "この商品を削除する", item_path(@item), method: :delete
-        - else 
-          = link_to "購入画面に進む", '#', class: "container__item-details__purchase-screen-button"
-          -# = link_to "購入画面に進む", new_item_purchase_path(@item), class: "container__item-details__purchase-screen-button"
+        - else
+          - if @item.order.present?
+            .container__product-details__message__sold-item
+              %a= "売り切れました"
+          - else
+            .container__product-details__message__buy-item
+              = link_to "購入画面に進む", buy_item_orders_path(@item), method: :get, class: "item-purchase-button"
 = render "items/footer"

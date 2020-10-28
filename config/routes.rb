@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'card/new'
+  get 'card/show'
+  get 'orders/index'
+  get 'orders/done'
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
@@ -15,8 +19,19 @@ Rails.application.routes.draw do
       get 'get_category_children', defaults: { format: 'json' }
       get 'get_category_grandchildren', defaults: { format: 'json' }
     end
+
+    resource :orders do
+      member do
+        get  "buy"
+        post "pay"
+      end
+    end
   end
 
-  resources :users, only: :show
+  resources :users, only: :show do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  end
+
+  resources :cards, only: [:new, :create, :show, :destroy] do
+  end
 end

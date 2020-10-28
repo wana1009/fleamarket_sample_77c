@@ -53,6 +53,16 @@ class ItemsController < ApplicationController
     end
   end
 
+
+  def pay
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      :amount => params[:amount],
+      :card => params['payjp-token'],
+      :currency => 'jpy'
+    )
+  end
+    
   def edit
     if current_user.id == @item.seller_id
       @category_parent_array = Category.where(ancestry: nil).each do |parent|

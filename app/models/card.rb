@@ -1,3 +1,3 @@
 class Card < ApplicationRecord
-  #payjpの導入が必要なため割愛
+  belongs_to :user
 end
