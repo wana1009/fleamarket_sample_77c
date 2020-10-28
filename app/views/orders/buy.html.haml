@@ -1,46 +1,35 @@
 .buy
   .wrapper
-  =render "items/header"
-  - if @user.card.present?
-    .main
-      .main-item
-        .main-item__content
-          .main-item__content--form
-            .itembox
-              %h2.itembox__name
-                = @item.name.truncate(30, omission: '...')
-                .itembox__image
-                .mini-image
-                  .mini-images
-                    =image_tag @item.images[0].image.url
-              .itembox__price
-                %span
-                  ¥
-                  = @item.price.to_s(:delimited)
-                .itembox__price--detail
-                  %span
-                    (税込)
-                  %span
-                    送料込み
-    .card-container
-      .card-wrapper
-        %h2.card-wrapper__title
-          購入内容の確認
-          = image_tag "visa-card.png"
-          %h3 カード番号
-          %p.creditcard-info__number
-            = "**** **** **** " + @card_info.last4
-          %h3 有効期限 月 / 年
-          %p.creditcard-info__period 
-            = @exp_month + " / " + @exp_year
-          .creditcard-info__period
-            = button_to "このカードで買う", buy_card_path(@item.id),method: :get ,class: "btn-card", data: { confirm: 'この商品を購入してよろしいですか?',cancel: 'やめる',commit: '購入する',  disable_with: "処理中..."}, title: '購入確認'
-            = button_to "トップページへ", root_path, method: :get, class: "btn-card"
-  - else
-    .item_none_btn
-      .purchese-btn
-        .messages
-          購入するにはクレジットカードを登録してください
-      = form_tag(action: :pay, method: :post) do
-        %script.payjp-button{src: "https://checkout.pay.jp", type: "text/javascript" ,"data-text": "クレジットカード登録" ,"data-key": "pk_test_07badb8acc00722abed1baf3",}
+  = render "items/header"
+  .main_contents
+    .main_details
+      -# # 商品情報を部分テンプレート化
+      -# = render "purchases/shared/purchase_product_info.html.haml", product: @product, images: @images
+    .purchase_registration
+      .purchase_registration_main
+        .payment
+          支払い金額
+        .amount
+          = "#{@item.price}" + "円"
+      - if @user.card.present?
+        .purchase_function
+          .card_info_title
+            クレジットカード情報
+            .card_info
+              .card_info__brand
+                = image_tag "cards/#{@card_src}", class: "card_info__brand__img", alt: @card_brand
+              .card_info__numbers
+                .number
+                  = "**** **** **** " + @customer_card.last4
+                .expiration_date
+                  .expiration_date__title
+                    有効期限
+                  .expiration_date__info
+                    = @exp_month + " / " + @exp_year
+          .purchase_function__btn
+            = link_to "登録クレジットカードで購入する", pay_item_orders_path(item_id: @item.id), method: :post, class: "btn"
+      - else 
+        .purchase_none_btn
+          = form_tag(action: :pay, method: :post) do
+            %script.payjp-button{src: "https://checkout.pay.jp", type: "text/javascript" ,"data-text": "購入する" ,"data-key": "pk_test_07badb8acc00722abed1baf3",}
   = render "items/footer"

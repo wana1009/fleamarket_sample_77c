@@ -1,8 +1,14 @@
 .pay
+  = render "items/header"
   .main_contents
     .main_details
-      .done__message
+      .main_details__message
         購入が完了しました。
-    %ul.after-purchase-links
+    -# 商品の表示を部分テンプレートで共通化
+    -# = render "purchases/shared/purchase_item_info.html.haml", item: @item, images: @images
+    %ul.purchased__links
       %li.purchased__links__TopPage
         = link_to "トップページに戻る", root_path, class: "purchased__links__TopPage__btn"
+      %li.purchased__links__index
+        = link_to "購入商品一覧", "#", class: "purchased__links__index__btn"
+  = render "items/footer"

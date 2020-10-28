@@ -81,7 +81,6 @@ class CardsController < ApplicationController
       if @card.destroy
         redirect_to root_path, alert: "削除が完了しました。"
       else
-        # 削除されなかった場合flashメッセージを表示させて、showのビューに移行
         redirect_to card_path(current_user.id), alert: "削除できませんでした。"
       end
     end

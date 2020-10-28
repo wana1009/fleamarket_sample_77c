@@ -80,5 +80,5 @@
           .container__product-details__message__delete-item
             = link_to "この商品を削除する", item_path(@item), method: :delete
         - else
-          = link_to "購入画面に進む",  buy_item_order_path(@item), method: :get, class: "item-purchase-button"
+          = link_to "購入画面に進む",  buy_item_orders_path(@item), method: :get, class: "item-purchase-button"
 = render "items/footer"
