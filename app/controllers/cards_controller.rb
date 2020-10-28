@@ -18,7 +18,7 @@ class CardsController < ApplicationController
       )
       @card = Card.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
       if @card.save
-        #もしcreateビューを作成しない場合はredirect_toなどで表示ビューを指定
+        redirect_to root_path
       else
         redirect_to action: "create"
       end
