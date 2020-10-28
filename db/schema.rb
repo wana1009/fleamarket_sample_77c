@@ -93,7 +93,6 @@ ActiveRecord::Schema.define(version: 2020_10_22_024443) do
     t.integer "order_id"
     t.integer "category_id", null: false
     t.integer "brand_id"
-    t.boolean "stock_status", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_items_on_brand_id"
