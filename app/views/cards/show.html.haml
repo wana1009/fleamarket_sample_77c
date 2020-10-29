@@ -1,25 +1,13 @@
-.show
-  .show__frame
-    .show__frame__title
-      登録クレジットカード情報
-    .credit_card__list
-      .credit_card__list__title
-        クレジットカード一覧
-      .credit_card__list__frame
-        .credit_card_info
-          .credit_card_info__brand
-            = image_tag "cards/#{@card_src}", class: "card_info__brand__img", alt: @card_brand
-          .credit_card_info__numbers
-            .number
-              = "**** **** **** " + @customer_card.last4
-            .expiration_date
-              .expiration_date__title
-                有効期限
-              .expiration_date__info
-                = @exp_month + " / " + @exp_year
-        .destroy__function
-          .destroy__function__link
-            = link_to card_path, method: :delete, class: "destroy__function__link__btn" do
-              削除する
-      .payment-details
-        = link_to "支払い方法について >", "", class: "payment-details__btn"
+.Mypage-main
+  = render "items/header"
+  .Mypage-main__contents.card-form
+    %h2.Payment__head 登録クレジットカード情報
+    %br
+    = "**** **** **** " + @customer_card.last4
+    %br
+    -# - exp_month = @default_card_information.exp_month.to_s
+    -# - exp_year = @default_card_information.exp_year.to_s.slice(2,3)
+    = @exp_month + " / " + @exp_year
+    = form_with url: card_path, method: :delete, id: 'charge-form', name: "inputForm", local: true do |f|
+      = f.submit "削除する", class: 'card-delete-btn'
+  = render "items/footer"
