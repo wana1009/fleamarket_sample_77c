@@ -1,0 +1,16 @@
+.productLists
+  - @items.each do |item|
+    - if !item.order_id.present?
+      .productList
+        = link_to item_path(item.id) do
+          %figure.productList--img
+            - if item.images.present?
+              = image_tag "#{item.images[0].url}"
+          .productList--body
+            %h3.name
+              #{item.name}
+            .details
+              %ul
+                %li
+                  #{item.price}円
+              %p (税込)
