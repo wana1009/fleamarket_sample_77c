@@ -1,0 +1,10 @@
+.delete-items
+  .delete-item__notification
+    商品を更新しました
+  .delete-main__induction
+    = link_to root_path do
+      トップページへ
+    = link_to item_path(@item_update) do
+      更新した商品を確認する
+    = link_to user_path(current_user.id) do
+      マイページへ

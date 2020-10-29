@@ -22,13 +22,19 @@
                   #previews
                     - if @item.persisted?
                       - @item.images.each_with_index do |image, i|
-                        = image_tag image.url.url, data: { index: i }, width: "100", height: '100'
+                        = image_tag image.url.url, data: { index: i }, width: "100", height: '100', class:"item-image"
                   = f.fields_for :images do |image|
                     .js-file_group{"data-index" => "#{image.index}"}
                       = image.file_field :url, class:'js-file'
                       %span.js-remove 削除
+                    - if @item.persisted?
+                      = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
+                  - if @item.persisted?
+                    .js-file_group{"data-index" => @item.images.count}
+                      = f.file_field :url, name: "item[images_attributes][#{@item.images.count}][url]", class: 'js-file'
+                      .js-remove 削除
 
-                
+
 
         .sell-container__content
           .sell-title
@@ -59,37 +65,32 @@
                   必須
             .sell-collection_select
               = f.label :category_id, {class: 'sell-collection_select__label'} do
-                = f.collection_select @category_id, Category.roots, :id, :name ,{prompt: "選択してください", selected: @parent_array},{id: 'parent_category'}
-                %i.fas.fa-chevron-down
-                .sell-collection_select__added
-                %i.fas.fa-chevron-down
-                = f.collection_select @category_id, @item.category.parent.parent.children, :id, :name ,{prompt: "選択してください", selected: @category_children_array},{class: 'sell-collection_select1', id: 'children_wrapper'}
-                .sell-collection_select__added
-                %i.fas.fa-chevron-down
-                = f.collection_select @category_id, @item.category.parent.children, :id, :name ,{prompt: "選択してください", selected: @category_grandchildren_array},{id: 'grandchildren_wrapper'}
-            .error-messages#error-category
+                =f.collection_select :category_id, @category_parent_array, :id, :name, {selected:@parent_array},{id:'parent_category'}
+              .sell-collection_select__added#children_wrapper
+                =f.collection_select :category_id, @category_children_array, :id, :name, {selected:@child_array},{id:"child__category", class:"sell-collection_select--select"}
+              .sell-collection_select__added#grandchildren_wrapper
+                =f.collection_select :category_id, @category_grandchildren_array, :id, :name, {selected:@grandchild_array},{class:"sell-collection_select__box--select"}
 
-            .sell-title
-              %h3.sell-title__text
-                ブランド
-                %span.sell-title__any
-                  任意
-            .sell-collection_select_brand
-              = f.label :cbrand_id, {class: 'sell-collection_select_brand__label'} do
-                = f.collection_select :brand_id, Brand.all, :id, :name, {prompt: "選択して下さい"},{ class: 'sell-collection_select_brand__input'}
-                %i.fas.fa-chevron-down
-            .error-messages#error-brand
 
-            .sell-title
-              %h3.sell-title__text
-                商品の状態
-                %span.sell-title__require
-                  必須
-            .sell-collection_select_condition
-              = f.label :condition_id, {class: 'sell-collection_select_condition__label'} do
-                = f.collection_select :condition_id, Condition.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select_condition__input', id: 'condition-select', required: "required"}
-                %i.fas.fa-chevron-down
-            .error-messages#error-condition
+          .sell-title
+            %h3.sell-title__text
+              ブランド
+              %span.sell-title__any
+                任意
+          .sell-collection_select_brand
+            = f.label :cbrand_id, {class: 'sell-collection_select_brand__label'} do
+              = f.collection_select :brand_id, Brand.all, :id, :name, {prompt: "選択して下さい"},{ class: 'sell-collection_select_brand__input'}
+          .error-messages#error-brand
+
+          .sell-title
+            %h3.sell-title__text
+              商品の状態
+              %span.sell-title__require
+                必須
+          .sell-collection_select_condition
+            = f.label :condition_id, {class: 'sell-collection_select_condition__label'} do
+              = f.collection_select :condition_id, Condition.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select_condition__input', id: 'condition-select', required: "required"}
+          .error-messages#error-condition
 
 
         .sell-container__content
@@ -106,8 +107,6 @@
             .sell-collection_select_charge
               = f.label :charge_id, class: 'sell-collection_select_charge__label' do
                 = f.collection_select :charge_id, Charge.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select_charge__input', id: 'charge-select', required: "required"}
-
-                %i.fas.fa-chevron-down
             .error-messages#error-deliverycost
 
             .sell-title
@@ -118,7 +117,6 @@
             .sell-collection_select_prefecture
               = f.label :prefecture_id, class: 'sell-collection_select_prefecture__label' do
                 = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select_prefecture__input', id: 'pref-select', required: "required"}
-                %i.fas.fa-chevron-down
             .error-messages#error-pref
 
             .sell-title
@@ -129,8 +127,6 @@
             .sell-collection_select_day
               = f.label :day_id, class: 'sell-collection_select_day__label' do
                 = f.collection_select :day_id, Day.all, :id, :name, {prompt: '選択して下さい'},{ class: 'sell-collection_select_day__input', id: 'day-select', required: "required"}
-
-                %i.fas.fa-chevron-down
             .error-messages#error-delivery_days
 
 
@@ -152,5 +148,5 @@
           .error-messages#error-price
 
           .submit-btn
-            = f.submit '出品する', class: 'submit-btn__sell-btn'
+            = f.submit '更新する', class: 'submit-btn__sell-btn'
             = link_to 'もどる', root_path, class: 'submit-btn__return-btn'
