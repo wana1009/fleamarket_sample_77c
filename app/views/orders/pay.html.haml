@@ -1,14 +1,42 @@
-.pay
-  = render "items/header"
+.confirms-page
+  .confirms-header
+    = render "items/header"
+
+
   .main_contents
     .main_details
       .main_details__message
         購入が完了しました。
-    -# 商品の表示を部分テンプレートで共通化
-    -# = render "purchases/shared/purchase_item_info.html.haml", item: @item, images: @images
-    %ul.purchased__links
-      %li.purchased__links__TopPage
-        = link_to "トップページに戻る", root_path, class: "purchased__links__TopPage__btn"
-      %li.purchased__links__index
-        = link_to "購入商品一覧", "#", class: "purchased__links__index__btn"
+  .confirms-main
+    .confirms-contents
+      %section.purchase_detail
+        %h2.purchase_detail__title
+          購入が完了しました
+
+      %section.buy_item
+        .buy_item__box
+          = image_tag @item.item_images[0].image.url, class: "buy_item__box__image"
+          .buy_item__box__group
+            .buy_item__box__group__name
+              = @item.name
+            .buy_item__box__group__price
+              .buy_item__box__group__price__shipping_fee_including_tax
+                送料込み (税込)
+              .buy_item__box__group__price__amount
+                ￥
+                -# 3桁でカンマ区切り
+                = @item.price.to_s.reverse.gsub( /(\d{3})(?=\d)/, '\1,').reverse
+
+      %section.pay_amount
+        .pay_amount__group
+          .pay_amount__group__titel
+            支払い金額
+          .pay_amount__group__payment
+            ￥
+            -# 3桁でカンマ区切り
+            = @item.price.to_s.reverse.gsub( /(\d{3})(?=\d)/, '\1,').reverse
+
+      %section.pay_btn
+        .pay_btn__path
+          = link_to "トップページへ戻る", items_path, class: "pay_btn__path__decoration"
   = render "items/footer"
