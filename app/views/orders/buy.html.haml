@@ -1,35 +1,82 @@
-.buy
-  .wrapper
-  = render "items/header"
-  .main_contents
-    .main_details
-      -# # 商品情報を部分テンプレート化
-      -# = render "purchases/shared/purchase_product_info.html.haml", product: @product, images: @images
-    .purchase_registration
-      .purchase_registration_main
-        .payment
-          支払い金額
-        .amount
-          = "#{@item.price}" + "円"
-      - if @user.card.present?
-        .purchase_function
-          .card_info_title
-            クレジットカード情報
-            .card_info
-              .card_info__brand
-                = image_tag "cards/#{@card_src}", class: "card_info__brand__img", alt: @card_brand
-              .card_info__numbers
-                .number
-                  = "**** **** **** " + @customer_card.last4
-                .expiration_date
-                  .expiration_date__title
-                    有効期限
-                  .expiration_date__info
-                    = @exp_month + " / " + @exp_year
-          .purchase_function__btn
-            = link_to "登録クレジットカードで購入する", pay_item_orders_path(item_id: @item.id), method: :post, class: "btn"
-      - else 
+.confirms-page
+  .confirms-header
+    = render "items/header"
+
+  .confirms-main
+    .confirms-contents
+      %section.purchase_detail
+        %h2.purchase_detail__title
+          購入内容の確認
+
+      %section.buy_item
+        .buy_item__box
+          = image_tag @item.item_images[0].image.url, class: "buy_item__box__image"
+          .buy_item__box__group
+            .buy_item__box__group__name
+              = @item.name
+            .buy_item__box__group__price
+              .buy_item__box__group__price__shipping_fee_including_tax
+                送料込み (税込)
+              .buy_item__box__group__price__amount
+                ￥
+                -# 3桁でカンマ区切り
+                = @item.price.to_s.reverse.gsub( /(\d{3})(?=\d)/, '\1,').reverse
+
+
+      %section.pay_amount
+        .pay_amount__group
+          .pay_amount__group__titel
+            支払い金額
+          .pay_amount__group__payment
+            ￥
+            -# 3桁でカンマ区切り
+            = @item.price.to_s.reverse.gsub( /(\d{3})(?=\d)/, '\1,').reverse
+
+
+      - if @user.card.present
+        %section.select
+          .select__group
+            .select__group__title
+              %h3.select__group__title__char
+                支払い方法
+              %h2 登録クレジットカード情報
+              %br
+              = "**** **** **** " + @customer_card.last4
+              %br
+              = exp_month + " / " + exp_year
+          = link_to cards_path, class: "select__registration" do
+            = icon("fas", "plus-circle", class: "select__registration__icon")
+            %span.select__registration__title
+              変更
+
+        %section.select
+          .select__group
+            .select__group__title
+              %h3.select__group__title__char
+                配送先
+              〒
+              = @address.postal-code.to_s.insert(3, "-")
+              %br
+              = @address.prefecture.name
+              = @address.city
+              = @address.house_number
+              %br
+              = @address.building_name
+              %br
+              TEL：
+              = @address.phone_number
+              %br
+              名前：
+              = @address.last_name
+              = @address.first_name
+
+        %section.purchase
+          .purchase__group
+            %P.purchase__group__description
+              = link_to "登録クレジットカードで購入する", pay_item_orders_path(item_id: @item.id), method: :post, class: "btn"
+      - else
         .purchase_none_btn
-          = form_tag(action: :pay, method: :post) do
-            %script.payjp-button{src: "https://checkout.pay.jp", type: "text/javascript" ,"data-text": "購入する" ,"data-key": "pk_test_07badb8acc00722abed1baf3",}
+          *商品を購入するには、マイページからクレジットカードの登録が必要です。
+          = link_to user_path(current_user.id) do
+          マイページへ
   = render "items/footer"
