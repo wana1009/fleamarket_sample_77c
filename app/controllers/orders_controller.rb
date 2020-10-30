@@ -37,33 +37,50 @@ class OrdersController < ApplicationController
     end
   end
 
+  # def pay
+
+  #   @item = Item.find(params[:item_id])
+  #   @images = @item.images.all
+
+
+  #   if @item.order_id.present?
+  #     redirect_to item_path(@item.id), alert: "売り切れています。"
+  #   else
+  #     @item.with_lock do
+  #       if current_user.card.present?
+  #         @card = Card.find_by(user_id: current_user.id)
+  #         Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+  #         charge = Payjp::Charge.create(
+  #         amount: @item.price,
+  #         customer: Payjp::Customer.retrieve(@card.customer_id),
+  #         currency: 'jpy'
+  #         )
+  #       else
+  #         Payjp::Charge.create(
+  #         amount: @item.price,
+  #         card: params['payjp-token'], # フォームを送信すると作成・送信されてくるトークン
+  #         currency: 'jpy'
+  #         )
+  #       @order = Order.new([item_id: @item.id, user_id: current_user.id])
+  #       end
+  #     end
+  #   end
+  # end
+
+
   def pay
+
     @item = Item.find(params[:item_id])
     @images = @item.images.all
+    @card = Card.find_by(user_id: current_user.id)
 
-
-    if @item.order_id.present?
-      redirect_to item_path(@item.id), alert: "売り切れています。"
-    else
-      @item.with_lock do
-        if current_user.card.present?
-          @card = Card.find_by(user_id: current_user.id)
-          Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
-          charge = Payjp::Charge.create(
-          amount: @item.price,
-          customer: Payjp::Customer.retrieve(@card.customer_id),
-          currency: 'jpy'
-          )
-        else
-          Payjp::Charge.create(
-          amount: @item.price,
-          card: params['payjp-token'], # フォームを送信すると作成・送信されてくるトークン
-          currency: 'jpy'
-          )
-        @Order = Order.create(user_id: current_user.id, item_id: @item.id)
-        end
-      end
-    end
+    Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
+    Payjp::Charge.create(
+      amount: @item.price,
+      customer: Payjp::Customer.retrieve(@card.customer_id), #顧客ID
+      currency: 'jpy', #日本円
+    )
+    @item.update(order_id: current_user.id)
   end
 
 end
