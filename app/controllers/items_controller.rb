@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :move_to_index,except: :index
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :show_all_instance, only: [:edit, :update]
   before_action :set_category_array, only: [:edit, :update]
@@ -128,6 +129,13 @@ class ItemsController < ApplicationController
     @category_parent = Category.find(@category_id).parent.parent
     @category_child = Category.find(@category_id).parent
     @category_grandchild = Category.find(@category_id)
+  end
+
+  private
+
+  # ログインしていない時にマイページに入れないように制限
+  def move_to_index
+    redirect_to root_path unless user_signed_in?
   end
 
 end

@@ -1,4 +1,5 @@
 class CardsController < ApplicationController
+  before_action :move_to_index
   require "payjp"
 
   def index
@@ -103,4 +104,12 @@ class CardsController < ApplicationController
       end
     end
   end
+
+  private
+
+  # ログインしていない時にマイページに入れないように制限
+  def move_to_index
+    redirect_to root_path unless user_signed_in?
+  end
+
 end

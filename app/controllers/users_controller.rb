@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :move_to_index, only: [:show]
+  before_action :move_to_index
   before_action :move_to_mypage, only: [:show]
 
   def edit
