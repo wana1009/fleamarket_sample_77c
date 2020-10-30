@@ -63,7 +63,7 @@ class ItemsController < ApplicationController
       :card => params['payjp-token'],
       :currency => 'jpy'
     )
-    @item.update(buyer_id: current_user.id)
+    @item.update(order_id: current_user.id)
   end
     
   def edit
