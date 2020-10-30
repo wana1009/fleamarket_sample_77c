@@ -10,7 +10,7 @@
 
       %section.buy_item
         .buy_item__box
-          = image_tag @item.item_images[0].image.url, class: "buy_item__box__image"
+          = image_tag "#{@item.images[0].url}", class: "buy_item__box__image"
           .buy_item__box__group
             .buy_item__box__group__name
               = @item.name
@@ -33,7 +33,7 @@
             = @item.price.to_s.reverse.gsub( /(\d{3})(?=\d)/, '\1,').reverse
 
 
-      - if @user.card.present
+      - if @user.card.present?
         %section.select
           .select__group
             .select__group__title
@@ -43,7 +43,8 @@
               %br
               = "**** **** **** " + @customer_card.last4
               %br
-              = exp_month + " / " + exp_year
+              = @exp_month + " / " + @exp_year
+
           = link_to cards_path, class: "select__registration" do
             = icon("fas", "plus-circle", class: "select__registration__icon")
             %span.select__registration__title
@@ -52,23 +53,23 @@
         %section.select
           .select__group
             .select__group__title
-              %h3.select__group__title__char
-                配送先
-              〒
-              = @address.postal-code.to_s.insert(3, "-")
-              %br
-              = @address.prefecture.name
-              = @address.city
-              = @address.house_number
-              %br
-              = @address.building_name
-              %br
-              TEL：
-              = @address.phone_number
-              %br
-              名前：
-              = @address.last_name
-              = @address.first_name
+              -# %h3.select__group__title__char
+              -#   配送先
+              -# 〒
+              -# = @address.postal_code.to_s.insert(3, "-")
+              -# %br
+              -# = @address.prefecture.name
+              -# = @address.city
+              -# = @address.house_number
+              -# %br
+              -# = @address.building_name
+              -# %br
+              -# TEL：
+              -# = @address.phone_number
+              -# %br
+              -# 名前：
+              -# = @address.last_name
+              -# = @address.first_name
 
         %section.purchase
           .purchase__group
@@ -78,5 +79,5 @@
         .purchase_none_btn
           *商品を購入するには、マイページからクレジットカードの登録が必要です。
           = link_to user_path(current_user.id) do
-          マイページへ
+            マイページへ
   = render "items/footer"

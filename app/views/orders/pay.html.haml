@@ -3,10 +3,6 @@
     = render "items/header"
 
 
-  .main_contents
-    .main_details
-      .main_details__message
-        購入が完了しました。
   .confirms-main
     .confirms-contents
       %section.purchase_detail
@@ -15,7 +11,7 @@
 
       %section.buy_item
         .buy_item__box
-          = image_tag @item.item_images[0].image.url, class: "buy_item__box__image"
+          = image_tag "#{@item.images[0].url}", class: "buy_item__box__image"
           .buy_item__box__group
             .buy_item__box__group__name
               = @item.name
