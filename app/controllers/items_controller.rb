@@ -11,6 +11,7 @@ class ItemsController < ApplicationController
     @item = Item.new
     @item.images.new
     @seller = Seller.new
+    @order = Order.new
     @category_parent_array = Category.where(ancestry: nil)
   end
   
@@ -64,7 +65,8 @@ class ItemsController < ApplicationController
       :card => params['payjp-token'],
       :currency => 'jpy'
     )
-    @item.update(order_id: current_user.id)
+    # @item.update(order_id: current_user.id)
+    @order = Order.new({item_id: @item.id, user_id: current_user.id})
   end
     
   def edit
