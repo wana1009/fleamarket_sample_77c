@@ -107,7 +107,6 @@ class CardsController < ApplicationController
 
   private
 
-  # ログインしていない時にマイページに入れないように制限
   def move_to_index
     redirect_to root_path unless user_signed_in?
   end

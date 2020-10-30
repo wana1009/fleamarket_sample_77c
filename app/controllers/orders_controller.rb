@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :move_to_index
   require "payjp"
 
   def buy
@@ -64,6 +65,12 @@ class OrdersController < ApplicationController
         end
       end
     end
+  end
+
+  private
+
+  def move_to_index
+    redirect_to root_path unless user_signed_in?
   end
 
 end
