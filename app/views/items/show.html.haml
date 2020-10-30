@@ -83,7 +83,7 @@
           .container__product-details__message__delete-item
             = link_to "この商品を削除する", item_path(@item), method: :delete
         - else
-          - if @item.order.present?
+          - if @item.order_id.present?
             .container__product-details__message__sold-item
               %a= "売り切れました"
           - else
