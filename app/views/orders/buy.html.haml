@@ -53,23 +53,23 @@
         %section.select
           .select__group
             .select__group__title
-              %h3.select__group__title__char
-                配送先
-              〒
-              = @address.postal_code.to_s.insert(3, "-")
-              %br
-              = @address.prefecture.name
-              = @address.city
-              = @address.house_number
-              %br
-              = @address.building_name
-              %br
-              TEL：
-              = @address.phone_number
-              %br
-              名前：
-              = @address.last_name
-              = @address.first_name
+              -# %h3.select__group__title__char
+              -#   配送先
+              -# 〒
+              -# = @address.postal_code.to_s.insert(3, "-")
+              -# %br
+              -# = @address.prefecture.name
+              -# = @address.city
+              -# = @address.house_number
+              -# %br
+              -# = @address.building_name
+              -# %br
+              -# TEL：
+              -# = @address.phone_number
+              -# %br
+              -# 名前：
+              -# = @address.last_name
+              -# = @address.first_name
 
         %section.purchase
           .purchase__group
