@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', ()=> {
+$(document).ready( ()=> {
 
   const buildFileField = (num)=> {
     const html = `<div data-index="${num}" class="js-file_group">
